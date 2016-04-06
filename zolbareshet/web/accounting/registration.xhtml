@@ -1,0 +1,238 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+<h:head>
+    <title>Registration Page - Zol Bareshet</title>
+    <h:outputStylesheet name="mystyles.css" library="css"/>
+    <h:outputScript name="tooltip.js" library="js"/>
+    <h:outputScript name="date.js" library="js"/>
+</h:head>
+<h:body>
+    <!-- TYTLE -->
+    <div class="zolbareshetIcon">
+        <h:graphicImage library="images" name="zolbareshet.png" />
+    </div>
+    <div class="pageTitle">Registration Page</div>
+    <div class="pageIcon">
+        <h:graphicImage library="images" name="people.png" height="100" />
+    </div>
+
+    <div class="content">
+        <p>Welcome to ZolBareshet registration page, please fill up your personal details<br/>(Fields marked with <span class="redStar">*</span>
+            are <b>mandatory</b>)
+        </p>
+        <!-- FORM -->
+
+        <h:form id="formid">
+
+            <!-- NAME SECTION -->
+
+            <p class="formstyle">Name</p>
+            <h:panelGrid columns="12" id="name">
+                <h:outputText value="First Name"/>
+                <h:inputText id="firstName" required="true" requiredMessage="Please enter your first name" value="#{customerBean.name.firstName}" autocomplete="off"
+                             validatorMessage="First name can contain only letters and numbers and must be fewer than 30 characters" onmouseout="popUp(event,'FN')" onmouseover="popUp(event,'FN')">
+                    <f:validateLength maximum="30"/>
+                    <f:validateRegex pattern="(\w*\d*)*"/>
+                </h:inputText><span class="redStar">*</span>
+                <h:message id="firstNameMessage" for="firstName" styleClass="error"/>
+                <h:outputText value="Last Name"/>
+                <h:inputText id="lastName" required="true" requiredMessage="Please enter your last name" value="#{customerBean.name.lastName}" autocomplete="off"
+                             validatorMessage="Last name can contain only letters and numbers and must be fewer than 30 characters" onmouseout="popUp(event,'LN')" onmouseover="popUp(event,'LN')">
+                    <f:validateLength maximum="30"/>
+                    <f:validateRegex pattern="(\w*\d*)*"/>
+                </h:inputText><span class="redStar">*</span>
+                <h:message id="lastNameMessage" for="lastName" styleClass="error"/>
+            </h:panelGrid>
+
+            <!-- ADDRESS SECTION -->
+
+            <p class="formstyle">Address</p>
+            <h:panelGrid columns="16" id="address" >
+                <h:outputText value="Country"/>
+                <h:selectOneMenu id="country" required="true" requiredMessage="Please select your country" value="#{customerBean.addressBean.country}" onmouseout="popUp(event,'CO')" onmouseover="popUp(event,'CO')">
+                    <f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
+                    <f:selectItems value="#{addressBean.countries}" />
+                </h:selectOneMenu><span class="redStar">*</span>
+                <h:message id="countryMessage" for="country" styleClass="error"/>
+                <h:outputText value="City"/>
+                <h:inputText id="city" required="true" requiredMessage="Please enter your city" value="#{customerBean.addressBean.city}" autocomplete="off"
+                             validatorMessage="city name can contain only letters and numbers and must be fewer than 30 characters" onmouseout="popUp(event,'CI')" onmouseover="popUp(event,'CI')">
+                    <f:validateLength maximum="30"/>
+                    <f:validateRegex pattern="(\w*\d*)*"/>
+                </h:inputText><span class="redStar">*</span>
+                <h:message id="cityMessage" for="city" styleClass="error"/>
+                <h:outputText value="Street"/>
+                <h:inputText id="street" required="true" requiredMessage="Please enter your street" value="#{customerBean.addressBean.street}" autocomplete="off"
+                             validatorMessage="street name can contain only letters and numbers and must be fewer than 30 characters" onmouseout="popUp(event,'ST')" onmouseover="popUp(event,'ST')">
+                    <f:validateLength maximum="30"/>
+                    <f:validateRegex pattern="(\w*\d*)*"/>
+                </h:inputText><span class="redStar">*</span>
+                <h:message id="streetMessage" for="street" styleClass="error"/>
+            </h:panelGrid>
+            <h:panelGrid columns="16" id="addressb" >
+                <h:outputText value="Street Number"/>
+                <h:inputText id="streetnumber" required="true" requiredMessage="Please enter your street number" value="#{customerBean.addressBean.houseNumber}" autocomplete="off"
+                             validatorMessage="street number can contain only positive number in range [1-999]" size="4" onmouseout="popUp(event,'SN')" onmouseover="popUp(event,'SN')">
+                    <f:validateLength maximum="3"/>
+                    <f:validator validatorId="positiveNumberValidator" />
+                </h:inputText><span class="redStar">*</span>
+                <h:message id="streetNumberMessage" for="streetnumber" styleClass="error"/>
+                <h:outputText value="Floor Number"/>
+                <h:inputText id="floornumber" required="false" value="#{customerBean.addressBean.floorNumber}" autocomplete="off"
+                             validatorMessage="floor number name can contain only positive number in range [1-99]" size="3" onmouseout="popUp(event,'FNU')" onmouseover="popUp(event,'FNU')">
+                    <f:validateLength maximum="2"/>
+                    <f:validator validatorId="positiveNumberValidator" />
+                </h:inputText>
+                <h:message id="floorNumberMessage" for="floornumber" styleClass="error"/>
+                <h:outputText value="Zip Code"/>
+                <h:inputText id="zipcode" required="false" value="#{customerBean.addressBean.zipCode}" autocomplete="off"
+                             validatorMessage="zipcode can contain only digits and must be in range [3-10]" size="10" onmouseout="popUp(event,'ZIP')" onmouseover="popUp(event,'ZIP')">
+                    <f:validateLength maximum="10"/>
+                    <f:validateRegex pattern="[1-9]{3,10}"/>
+                </h:inputText>
+                <h:message id="zipcodeMessage" for="zipcode" styleClass="error"/>
+            </h:panelGrid>
+
+            <!-- PHONE SECTION -->
+
+            <p class="formstyle">Phones</p>
+            <h:panelGrid id="phones" columns="14" >
+                <c:forEach var="title" items="#{customerBean.phonesList}">
+                    <h:inputText id="#{title.id}perfix" required="true" requiredMessage="please enter the perfix"  value="#{title.perfix}"
+                                 validatorMessage="perfix must can contain [2-3] digits" size="3"  onmouseout="popUp(event,'PP')" onmouseover="popUp(event,'PP')">
+                        <f:validateLength maximum="3" minimum="2"/>
+                        <f:validator validatorId="integervalidator" />
+                    </h:inputText>
+                    <h:message for="#{title.id}perfix" styleClass="error"/>
+                    <h:inputText   id="#{title.id}number" required="true" requiredMessage="please enter phone number"  value="#{title.phoneNumber}"
+                                   validatorMessage="phone number can contain [7-12] digits" size="13"  onmouseout="popUp(event,'PN')" onmouseover="popUp(event,'PN')"  >
+                        <f:validateLength maximum="12" minimum="7"/>
+                        <f:validator validatorId="integervalidator" />
+                    </h:inputText>
+                    <h:message for="#{title.id}number" styleClass="error"/>
+                    <h:selectOneMenu  id="#{title.id}type" required="true" requiredMessage="please select phone type" value="#{title.type}" onmouseout="popUp(event,'PT')" onmouseover="popUp(event,'PT')">
+                        <f:selectItem itemLabel="---select---" itemValue=""/>
+                        <f:selectItem itemLabel="HOME" itemValue="Home"/>
+                        <f:selectItem itemLabel="WORK" itemValue="Work"/>
+                        <f:selectItem itemLabel="MOBILE" itemValue="Mobile"/>
+                    </h:selectOneMenu><span class="redStar">*</span>
+                    <h:message for="#{title.id}type" styleClass="error"/>
+                </c:forEach>
+            </h:panelGrid>
+            <h:message for="phones" styleClass="error"/>
+            <h:commandButton class="styled-button" value="+" action="#{customerBean.addPhone()}" immediate="true">
+                <f:ajax render="@form"/>
+            </h:commandButton>
+            <h:commandButton class="styled-button"  value="-" action="#{customerBean.removePhone()}" immediate="true">
+                <f:ajax render="@form"/>
+            </h:commandButton>
+
+            <!-- PERSONAL DETAILS SECTION -->
+
+            <p class="formstyle">Personal Information</p>
+            <h:panelGrid columns="16" >
+                <h:outputText value="Birthday"  />
+                <h:inputText id="birthday" value="#{customerBean.userInfo.birthDate}" autocomplete="off"
+                             converterMessage="enter date in format [dd/mm/yy]" size="6" onmouseout="popUp(event,'BD')" onmouseover="popUp(event,'BD')" onkeypress="dateFormat('formid:birthday')" >
+                    <f:convertDateTime type="date" pattern="dd/MM/yy" dateStyle="short" />
+                </h:inputText>
+                <h:message id="birthdayMessage" for="birthday" styleClass="error"/>
+                <h:outputText value="Gender"  />
+                <h:selectOneMenu id="gender" required="true" converterMessage="" value="#{customerBean.userInfo.userGender}" onmouseout="popUp(event,'G')" onmouseover="popUp(event,'G')">
+                    <f:selectItem itemLabel="---select---" itemValue="null"/>
+                    <f:selectItem itemLabel="MALE" itemValue="MALE"/>
+                    <f:selectItem itemLabel="FEMALE" itemValue="FEMALE"/>
+                    <f:validator validatorId="nullvalidator"/>
+                </h:selectOneMenu>
+                <h:message for="gender" styleClass="error"/>
+                <h:outputText value="EMAIL"  />
+                <h:inputText id="mailaddress" value="#{customerBean.userInfo.mailAddress}" required="true" requiredMessage="Please enter your mail address" autocomplete="off"
+                             onmouseout="popUp(event,'E')" onmouseover="popUp(event,'E')" validatorMessage="enter email in format X@Y.Z">
+                    <f:validateRegex pattern="[\w,\d,][\w,\d,-,_]*@[\w,\d]+\.[\w,\d]+"/>
+                </h:inputText>
+                <h:message id="mailMessage" for="mailaddress" styleClass="error"/>
+            </h:panelGrid>
+
+            <!-- CREDENTIALS SECTION -->
+
+            <p class="formstyle">LOGIN Information</p>
+            <h:panelGrid columns="16" >
+                <h:outputText value="NickName"  />
+                <h:inputText id="nickname" value="#{customerBean.nickName}" required="true" requiredMessage="please enter your login nickname" autocomplete="off"
+                             validatorMessage="nick name can contain only english letters and digits" size="15" onmouseout="popUp(event,'NM')" onmouseover="popUp(event,'NM')"  >
+                    <f:validateLength minimum="3" maximum="15"/>
+                    <f:validateRegex pattern="[\d,\w]*"/>
+                </h:inputText>
+                <h:message id="nickNameMessage" for="nickname" styleClass="error"/>
+                <h:outputText value="Password"  />
+                <h:inputText id="password" value="#{customerBean.password.password}" required="true" requiredMessage="Please enter your password" autocomplete="off"
+                             validatorMessage="password must be 6 character long contains atleast one digit and one letter" size="8" onmouseout="popUp(event,'P')" onmouseover="popUp(event,'P')"  >
+                    <f:validateLength minimum="6"/>
+                </h:inputText>
+                <h:message id="passwordMessage" for="password" styleClass="error"/>
+            </h:panelGrid>
+            <h:commandButton class="styled-button" value="Register" action="#{customerBean.register}">
+                <f:ajax execute="@form" render="@form"/>
+            </h:commandButton>
+            <h:outputText value="The nickname you chose is already exists, try another one"  rendered="#{customerBean.isNickNameAlreadyExists()?'true':'false'}" style="color: red; size: 20px;"/>
+            <h:outputText value="The email you chose is already exists"  rendered="#{customerBean.isEmailAlreadyExists()?'true':'false'}" style="color: red; size: 20px;"/>
+        </h:form>
+    </div>
+    <div id="BTN" class="tip">Press to Submit</div>
+    <div id="FN" class="tip">Fill up your first name</div>
+    <div id="LN" class="tip">Fill up your last name</div>
+    <div id="CO" class="tip">select your country</div>
+    <div id="CI" class="tip">Fill up your city </div>
+    <div id="ST" class="tip">Fill up your street </div>
+    <div id="SN" class="tip">Fill up your street number </div>
+    <div id="FNU" class="tip">Fill up your floor number </div>
+    <div id="ZIP" class="tip">Fill up your zip code </div>
+    <div id="PT" class="tip">Pick the phone types you want to store in your profile</div>
+    <div id="PP" class="tip">fill up the phone's perfix</div>
+    <div id="PN" class="tip">fill up the phone's number</div>
+    <div id="BD" class="tip">fill up your birth date</div>
+    <div id="G" class="tip">select your gender</div>
+    <div id="E" class="tip">fill up your Email address</div>
+    <div id="NM" class="tip">fill up your login nickName</div>
+    <div id="P" class="tip">fill up your password</div>
+
+    <div class="webService" >
+        <a href="http://www.weathercast.co.uk/" style="padding:0;background:none" target="_blank" title="Your weather service">
+            <img src="http://www.weathercast.co.uk/meteo/hptool/logo_meteogroup.png" alt="" width="240" height="64" border="0" style="display:block;" />
+        </a>
+        <div style="background-color:#102840;color:#00B0CA;font-family:Verdana,Arial,Tahoma,Times New Roman;font-weight:bold;font-size:10px;width:240px;text-align:center">
+            <a href="http://www.weathercast.co.uk/world-weather/city-weather/city/972X1188/tel-aviv-yafo.html" target="_blank" style="color:#00B0CA;font-family:Verdana,Arial,Tahoma,Times New Roman;font-weight:bold;font-size:10px;padding:0;background:none"
+               title="Detailed weather forecast for Weather Tel Aviv">Weather Tel Aviv/Jerusalem
+            </a>
+        </div>
+        <iframe width="240" height="227" scrolling="no" frameborder="0"
+                src="http://www.weathercast.co.uk/meteo/hptool/index.php?cid=972X1188&amp;cityName=tel-aviv-yafo;-0.12607;51.5071&amp;l=en&amp;style=1&amp;v=gb&amp;ver=2&amp;c1=00B0CA&amp;c2=102840&amp;c3=102840&amp;c4=ffffff&amp;c5=102840&amp;c6=ffffff&amp;c7=102840&amp;f1a=1&amp;f1b=2&amp;f2a=1&amp;f2b=1&amp;f3a=1&amp;f3b=1&amp;ct1=1&amp;ct2=8&amp;ct3=6&amp;ct4=5&amp;ct5=11&amp;fcd=0">
+        </iframe>
+        <div style="height:14px;width:240px;text-align:center;background-color:#f8b920">
+            <a href="http://www.weathercast.co.uk/" target="_blank" style="background:none;padding:0;text-decoration:none;color:#000000;font-family:Verdana,Arial,Tahoma,Times New Roman;font-weight:bold;font-size:10px" title="Latest weather observations and 14 day forecasts for over 2 MM locations worldwide"> weathercast.co.uk
+            </a>
+        </div>
+        <div class="webService2">
+            <div style="background-color:#102840;color:#00B0CA;font-family:Verdana,Arial,Tahoma,Times New Roman;font-weight:bold;font-size:10px;width:120px;text-align:center">
+                <a href="http://www.weathercast.co.uk/world-weather/city-weather/city/972X327/jerusalem.html" target="_blank" style="color:#00B0CA;font-family:Verdana,Arial,Tahoma,Times New Roman;font-weight:bold;font-size:10px;padding:0;background:none"
+
+                >
+                </a>
+            </div>
+            <iframe width="120" height="227" scrolling="no" frameborder="0"
+                    src="http://www.weathercast.co.uk/meteo/hptool/index.php?cid=972X327&amp;cityName=jerusalem;-0.12607;51.5071&amp;l=en&amp;style=1&amp;v=gb&amp;ver=2&amp;c1=00B0CA&amp;c2=102840&amp;c3=102840&amp;c4=ffffff&amp;c5=102840&amp;c6=ffffff&amp;c7=102840&amp;f1a=1&amp;f1b=2&amp;f2a=1&amp;f2b=1&amp;f3a=1&amp;f3b=1&amp;ct1=1&amp;ct2=8&amp;ct3=6&amp;ct4=5&amp;ct5=11&amp;fcd=0">
+            </iframe>
+            <div style="height:14px;width:120px;text-align:center;background-color:#f8b920">
+                <a href="http://www.weathercast.co.uk/" target="_blank" style="background:none;padding:0;text-decoration:none;color:#000000;font-family:Verdana,Arial,Tahoma,Times New Roman;font-weight:bold;font-size:10px" title="Latest weather observations and 14 day forecasts for over 2 MM locations worldwide"> weathercast.co.uk
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</h:body>
+</html>

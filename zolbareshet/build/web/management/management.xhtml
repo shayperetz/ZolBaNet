@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+<h:head>
+    <title>Management Page - Zol Bareshet</title>
+    <h:outputStylesheet name="mystyles.css" library="css"/>
+    <h:outputScript name="tooltip.js" library="js"/>
+    <h:outputScript name="date.js" library="js"/>
+</h:head>
+<h:body>
+    <!-- TYTLE -->
+    <div class="zolbareshetIcon">
+        <h:graphicImage library="images" name="zolbareshet.png" />
+    </div>
+    <div class="pageTitle">Management Page</div>
+    <div class="pageIcon">
+        <h:graphicImage library="images" name="tools.png" height="100" />
+    </div>
+
+    <div class="content">
+        <h:form>
+        <h:panelGrid style="position: absolute; left: 200px;" columns="9" id="buttons">
+            <h:commandButton class="styled-button" value="Manage Super Users" action="#{managerPageHelperBean.setShowManagerSection()}"/>
+            <h:outputText/>
+            <h:commandButton class="styled-button" value="Manage Products" action="#{managerPageHelperBean.setShowProductsSection()}"/>
+            <h:outputText/>
+            <h:commandButton class="styled-button" value="View Server Configuration" action="#{managerPageHelperBean.setShowConfigurationSection()}"/>
+            <h:outputText/>
+            <h:commandButton class="styled-button" value="View Server Log" action="#{managerPageHelperBean.setShowLogSection()}"/>
+            <h:outputText/>
+            <h:commandButton class="styled-button" value="View Reports" action="#{managerPageHelperBean.setShowReportSection()}"/>
+        </h:panelGrid>
+            <div class="manger-section">
+            <h:panelGroup rendered="#{managerPageHelperBean.showLogSection}">
+            <ui:include src="log.xhtml" />
+            </h:panelGroup>
+            </div>
+            <div class="manger-section">
+            <h:panelGroup rendered="#{managerPageHelperBean.showManagerSection}">
+                <ui:include src="superusers.xhtml" />
+            </h:panelGroup>
+            </div>
+            <div class="manger-section">
+            <h:panelGroup rendered="#{managerPageHelperBean.showReportSection}">
+                <ui:include src="reports.xhtml" />
+            </h:panelGroup>
+            </div>
+            <div class="manger-section">
+            <h:panelGroup rendered="#{managerPageHelperBean.showConfigurationSection}">
+                <ui:include src="config.xhtml" />
+            </h:panelGroup>
+            </div>
+            <div class="manger-section">
+            <h:panelGroup rendered="#{managerPageHelperBean.showProductsSection}">
+                <ui:include src="products.xhtml" />
+            </h:panelGroup>
+            </div>
+
+        </h:form>
+    </div>
+</h:body>
+</html>

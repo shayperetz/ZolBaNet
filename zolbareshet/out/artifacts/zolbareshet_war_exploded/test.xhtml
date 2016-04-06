@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<link rel="stylesheet" type="text/css" href="../resources/css/testcss.css" media="screen" />
+<h:body>
+    <!-- SETTING PROPERTY NUM OF OBJECT A-->
+    <h:form>
+        <h:outputText value="pick a number"></h:outputText>
+        <h:inputText id="num" value="#{a.number}" required="true" requiredMessage="Please enter a number">
+            <f:validateLength minimum="2"/>
+        </h:inputText>
+    </h:form>
+    <h:message for="num" style="color: royalblue;"/>
+
+    <!--CONDITIONAL OUTPUT-->
+    <h:outputText styleClass="#{a.number!=0?'a':'b'}" value="#{a.number}"/>
+
+    <br/>
+    <!--USING TOSTRING OF A-->
+    <h:outputText value="#{a}"/>
+
+    <!--INITIALIZE ALL A VALUES-->
+    <h:form>
+        <h:outputText value="pick a number"></h:outputText>
+        <h:inputText id="num1" value="#{a.number}" required="true" requiredMessage="Please enter a number">
+            <f:validateLength minimum="2"/>
+        </h:inputText>
+        <h:message for="num1" style="color: royalblue;"/>
+        <h:outputText value="pick a string"></h:outputText>
+        <h:inputText id="string" value="#{a.string}" required="true" requiredMessage="Please enter a string">
+            <f:validateLength minimum="2"/>
+        </h:inputText>
+        <h:outputText value="pick a second number"></h:outputText>
+        <h:inputText id="secnum" value="#{a.b.numberb}" required="true" requiredMessage="Please enter a number">
+            <f:validateLength minimum="2"/>
+        </h:inputText>
+        <h:commandButton value="submit"/>
+        <h:outputText id="ID" value="#{a}"/>
+    </h:form>
+
+    <!--USING METHODS -->
+    <h:outputText value="#{a.b.foo()}"/>
+    <h:outputText value="#{a.b.creationTime}"/>
+
+    <h:form>
+        <h:commandButton value="submit" action="#{customer.register}"/>
+    </h:form>
+    <!--using select one list-->
+    <h:form>
+        <h:selectOneMenu value="#{a.string}">
+            <f:selectItem itemValue="hello" itemLabel="Item 1" />
+            <f:selectItem itemValue="goodbye" itemLabel="Item 2" />
+        </h:selectOneMenu>
+        <h:commandButton value="submit"/>
+        <h:outputText value="#{a}"/>
+    </h:form>
+    <br/>
+    <!--using the same without submit button-->
+
+    <h:form>
+        <h:selectOneMenu value="#{a.string}"  onchange="submit()">
+            <f:selectItem itemValue="hello" itemLabel="Item 1" />
+            <f:selectItem itemValue="goodbye" itemLabel="Item 2" />
+        </h:selectOneMenu>
+        <h:outputText id="output" value="#{a}"/>
+    </h:form>
+
+    <!--same with private list of options-->
+    <h:form>
+        <h:selectOneMenu value="#{a.string}"  onchange="submit()">
+            <f:selectItems value="#{a.array}"/>
+        </h:selectOneMenu>
+        <h:outputText value="#{a}"/>
+    </h:form>
+
+    <!--USING CONVERTER - HERE WE ARE SETTING NEW OBJECT B OF A-->
+    <h:form>
+        <h:outputText value="give new B for A"/>
+        <h:inputText value="#{a.b}" converter="bConverter" />
+    </h:form>
+
+    <!--same but now using one menu list  -->
+    <h:form>
+    <h:selectOneMenu  id="abc" value="#{a.b}"  converter="bConverter">
+    <f:selectItems value="#{a.b.list}" var="type" itemValue="#{type}"/>
+        </h:selectOneMenu>
+        <h:commandButton value="submit"/>
+        <h:message for="abc"  styleClass="error"/>
+    </h:form>
+
+    <!--working with collections-->
+    <c:forEach var="title" items="#{c.map}" varStatus="v">
+        <i>#{title.key}</i>
+        #{v.last ? '':','}
+    </c:forEach>
+
+
+
+
+</h:body>
+
+</html>

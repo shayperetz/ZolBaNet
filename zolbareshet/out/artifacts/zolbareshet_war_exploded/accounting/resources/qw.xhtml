@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>JSF and CSS example</title>
+    <style type="text/css">
+        .message { text-align: left;
+            letter-spacing:5px;
+            color:#000099
+        }
+        .message-font { font-family:georgia,garamond,serif;
+            font-size:20px;
+            font-style:italic;
+        }
+        .odd { background-color: blue }
+        .even { background-color: red }
+    </style>
+</h:head>
+<h:body>
+    <h:form>
+        <h:panelGrid columns="3" border="1"
+                     footerClass="#{bean.messageProperty}"
+                     headerClass="#{bean.messageFontProperty}"
+                     rowClasses="#{bean.oddevenProperty}"
+                     title="PanelGrid and CSS">
+            <f:facet name="header">
+                <h:outputText value="Fill Names Below"/>
+            </f:facet>
+            <h:inputText/>
+            <h:inputText/>
+            <h:inputText/>
+            <h:inputText/>
+            <h:inputText/>
+            <h:inputText/>
+            <h:inputText/>
+            <h:inputText/>
+            <h:inputText/>
+            <h:inputText/>
+            <h:inputText/>
+            <h:inputText/>
+            <f:facet name="footer">
+                <h:outputText value="The End"/>
+            </f:facet>
+        </h:panelGrid>
+    </h:form>
+</h:body>
+</html>
