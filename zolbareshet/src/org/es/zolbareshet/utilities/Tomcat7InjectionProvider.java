@@ -27,7 +27,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 
-
+//so we can use the @Resource annotation - this is class is currently not in use
 public class Tomcat7InjectionProvider extends DiscoverableInjectionProvider
 {
     private Logger logger = LoggerFactory.getLogger();

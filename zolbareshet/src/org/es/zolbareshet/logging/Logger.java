@@ -17,7 +17,6 @@ public abstract class Logger {
 
     public abstract void destroy();
 
-    public abstract List<Pair<String, Integer>> readLog();
 
 
 }

@@ -8,6 +8,7 @@ import org.es.zolbareshet.logging.LoggerFactory;
 import org.es.zolbareshet.logging.MainLogger;
 import org.es.zolbareshet.utilities.Constants;
 import org.es.zolbareshet.utilities.PropertiesFileManager;
+import org.es.zolbareshet.utilities.Utils;
 
 import javax.naming.Context;
 import java.util.Hashtable;
@@ -16,10 +17,9 @@ import java.util.Properties;
 
 
 public class CustomDataSourceFactory  extends BasicDataSourceFactory {
-    private Properties prop = PropertiesFileManager.getProp();
-    private String username=prop.getProperty(Constants.USER_NAME_PROPERTY,null);
-    private String encPass=prop.getProperty(Constants.ENCRYPTED_PASSWORD_PROPERTY,null);
-    private String port=prop.getProperty(Constants.PORT_PROPERTY,null);
+    private String username= Utils.getPropertyOrDefault(Constants.USER_NAME_PROPERTY,null);
+    private String encPass=Utils.getPropertyOrDefault(Constants.ENCRYPTED_PASSWORD_PROPERTY,null);
+    private String port=Utils.getPropertyOrDefault(Constants.PORT_PROPERTY,null);
     private Logger logger = LoggerFactory.getLogger();
 
     @Override

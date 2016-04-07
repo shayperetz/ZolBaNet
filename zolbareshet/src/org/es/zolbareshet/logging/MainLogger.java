@@ -1,10 +1,13 @@
 package org.es.zolbareshet.logging;
 
 import javafx.util.Pair;
+import org.es.zolbareshet.services.ServiceManager;
 import org.es.zolbareshet.utilities.Constants;
 import org.es.zolbareshet.utilities.FileChangeListener;
 import org.es.zolbareshet.utilities.PropertiesFileManager;
+import org.es.zolbareshet.utilities.Utils;
 
+import javax.faces.bean.ManagedBean;
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -17,10 +20,6 @@ public class MainLogger extends Logger {
     private static File logFile = null;
     private String LOG_FILE_NAME;
     private String level;
-
-
-    private Properties prop = PropertiesFileManager.getProp();
-    private LogFileListener listener;
     private PrintStream stdout = null;
     private static volatile MainLogger logger;
 
@@ -30,8 +29,8 @@ public class MainLogger extends Logger {
 
         try {
 
-            LOG_FILE_NAME = prop.getProperty(Constants.LOG_FILE_NAME_PROPERTY, null);
-            level = prop.getProperty(Constants.DEBUGGING_LEVEL_PROPERTY, "INFO");
+            LOG_FILE_NAME = Utils.getPropertyOrDefault(Constants.LOG_FILE_NAME_PROPERTY, null);
+            level = Utils.getPropertyOrDefault(Constants.DEBUGGING_LEVEL_PROPERTY, "INFO");
             if (LOG_FILE_NAME == null || LOG_FILE_NAME.trim().equals("")) {
                 throw new Exception();
             }
@@ -47,8 +46,7 @@ public class MainLogger extends Logger {
             }
             try {
                 logFile = new File(LOG_FILE_NAME);
-                listener = new LogFileListener(PropertiesFileManager.getConfigFile());
-                listener.start();
+                ServiceManager.addService(new LogFileListener(PropertiesFileManager.getConfigFile()));
                 stdout = new PrintStream(new FileOutputStream(logFile, true));
 
 
@@ -81,7 +79,7 @@ public class MainLogger extends Logger {
 
     class LogFileListener extends FileChangeListener {
         public LogFileListener(File file) {
-            super(file);
+            super(file, "file change listener for configuration file");
         }
 
 
@@ -94,8 +92,13 @@ public class MainLogger extends Logger {
                 e.printStackTrace();
             }
 
-            level = prop.getProperty(Constants.DEBUGGING_LEVEL_PROPERTY, "INFO");
+            level = Utils.getPropertyOrDefault(Constants.DEBUGGING_LEVEL_PROPERTY, "INFO");
         }
+
+    }
+
+    public static File getLogFile() {
+        return logFile;
     }
 
     public static Logger getLogger() {
@@ -125,20 +128,13 @@ public class MainLogger extends Logger {
                 stdout.close();
                 System.out.println("closing log file");
             }
-            if (listener != null && listener.isAlive()) {
-                listener.stopRunning();
-                listener.join();
-                System.out.println("stopping file listener");
-            }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    @Override
-    public synchronized List<Pair<String, Integer>> readLog() {
+
+    public static synchronized List<Pair<String, Integer>> readLog() {
         BufferedReader br = null;
         int i=0;
         List<Pair<String, Integer>> logLines = new ArrayList<>();
@@ -163,8 +159,17 @@ public class MainLogger extends Logger {
                 e.printStackTrace();
             }
         }
-        log(LEVEL.INFO,"testing");
         return logLines;
+    }
+
+    public static synchronized void clearLog(){
+        try {
+            PrintWriter p = new PrintWriter(logFile);
+            p.write("");
+            p.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }

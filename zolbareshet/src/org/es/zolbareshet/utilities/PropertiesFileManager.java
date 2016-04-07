@@ -6,10 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
-/**
- * Created by eilons on 3/27/2016.
- */
-@ManagedBean
+
 public class PropertiesFileManager {
     private static final Properties prop;
     private static File configFile = null;
@@ -63,13 +60,13 @@ public class PropertiesFileManager {
         }
     }
 
-    public ArrayList<String> readFile() {
+    public static ArrayList<String> readFile() {
         BufferedReader br = null;
         ArrayList<String> configLine = new ArrayList<String>();
         try {
             br = new BufferedReader(new FileReader(configFile));
             String line = br.readLine();
-            while (line != null) {
+            while (line != null && line.length()>0) {
                 if(line.charAt(0)!='#') {
                     configLine.add(line);
                 }

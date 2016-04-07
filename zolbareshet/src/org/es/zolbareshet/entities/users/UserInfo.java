@@ -1,6 +1,7 @@
 package org.es.zolbareshet.entities.users;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import java.util.Date;
 
 
@@ -9,7 +10,6 @@ public class UserInfo {
     private gender userGender;
     private Date birthDate;
     private String mailAddress;
-
     public UserInfo(){
 
     }
@@ -19,6 +19,7 @@ public class UserInfo {
         this.birthDate = birthDate;
         this.mailAddress=mailAddress;
     }
+
 
     public gender getUserGender() {
         return userGender;

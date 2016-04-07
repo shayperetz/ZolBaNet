@@ -1,5 +1,7 @@
 package org.es.zolbareshet.entities.users;
 
+import org.es.zolbareshet.utilities.Constants;
+
 import javax.faces.bean.ManagedBean;
 
 
@@ -10,32 +12,25 @@ public class PhoneBean {
     private String perfix;
     private String phoneNumber;
     private phoneType type;
-    private String id;
-
-    public PhoneBean(){
-        id="a"+Long.toString(System.currentTimeMillis());
-    }
 
 
-    public PhoneBean(String perfix, String phoneNumber) {
-        this.perfix = perfix;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public phoneType getType() {
         return type;
     }
 
-    public void setType(phoneType type) {
-        this.type = type;
+    public void setType(int type) {
+
+        switch(type){
+            case Constants.HOME:
+                this.type=phoneType.Home;
+                break;
+            case Constants.MOBILE:
+                this.type=phoneType.Mobile;
+                break;
+           case Constants.WORK:
+                this.type=phoneType.Work;
+        }
     }
 
     public String getPerfix() {

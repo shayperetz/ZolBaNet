@@ -1,75 +1,131 @@
 package org.es.zolbareshet.entities.products;
 
+import org.es.zolbareshet.queries.SimpleQueryInvoker;
+import org.es.zolbareshet.utilities.Constants;
+
 import javax.faces.bean.ManagedBean;
-import java.awt.image.BufferedImage;
+import javax.servlet.http.Part;
+import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 
 @ManagedBean
 public class Product {
-    private int PartNumber ;
-    private String PartName ;
-    private String Description ;
-    private float Price ;
-    private int AvailableQuantity ;
-    private boolean IsActive ;
+    private long productNumber;
+    private String productName;
+    private String description;
+    private float price;
+    private int availableQuantity;
+    private boolean isForSale =true ;
     private float discount ;
-    private BufferedImage image;
-    private String category;
+    private ArrayList<String> categories;
+    private Part image;
+    private int imagesize;
+    private static long nextProductNumber=0L;
 
-    public int getPartNumber() {
-        return PartNumber;
+    //for uploading image
+    private  InputStream is = null;
+    private File file;
+    private FileInputStream fis=null;
+
+
+    public Product(){
+       setProductNumber(getNextProductNumber());
+   }
+
+    public synchronized static long getNextProductNumber() {
+        return nextProductNumber;
     }
 
-    public void setPartNumber(int partNumber) {
-        PartNumber = partNumber;
+
+    public synchronized static void incrementNextProductNumber(){
+        nextProductNumber++;
     }
 
-    public String getPartName() {
-        return PartName;
+    public long getProductNumber() {
+        return productNumber;
     }
 
-    public void setPartName(String partName) {
-        PartName = partName;
+    public void setProductNumber(long productNumber) {
+        this.productNumber = productNumber;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
-    public BufferedImage getImage() {
+      public void setDescription(String description) {
+        this.description = description;
+
+    }
+
+    public Part getImage() {
         return image;
     }
 
-    public void setImage(BufferedImage image) {
-        this.image = image;
+    public void setImage(Part image) {
+
+       if(image!=null) {
+            try {
+                        is = image.getInputStream();
+                        file = new File("C:\\", "temp"+System.currentTimeMillis()+".png");
+                        imagesize = (int)image.getSize();
+                        Files.copy(is, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    finally {
+                        try {
+                            is.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+        }
     }
 
-    public void setDescription(String description) {
-        Description = description;
+    public ArrayList<String> getCategories() {
+        return categories;
+    }
 
+    public void setCategories(ArrayList<String> categories) {
+        this.categories = categories;
     }
 
     public float getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(float price) {
-        Price = price;
+        this.price = price;
     }
 
     public int getAvailableQuantity() {
-        return AvailableQuantity;
+        return availableQuantity;
     }
 
     public void setAvailableQuantity(int availableQuantity) {
-        AvailableQuantity = availableQuantity;
+        this.availableQuantity = availableQuantity;
     }
 
-    public boolean isActive() {
-        return IsActive;
+    public boolean isForSale() {
+        return isForSale;
     }
 
-    public void setActive(boolean active) {
-        IsActive = active;
+    public void setForSale(boolean forSale) {
+        isForSale = forSale;
     }
 
     public float getDiscount() {
@@ -78,5 +134,57 @@ public class Product {
 
     public void setDiscount(float discount) {
         this.discount = discount;
+    }
+
+    public String getImageFromServlet(){
+        return "/zolbareshet/getPhoto/?source=product&amp;imagename=" + getProductName();
+    }
+
+    public String saveProduct(){
+        if(productName!=null&&description!=null&&availableQuantity>0&&file!=null){
+            try {
+                        fis= new FileInputStream(file);
+                        SimpleQueryInvoker.addProduct(productNumber,productName,description,price,availableQuantity,discount, isForSale, fis, imagesize);
+                        nextProductNumber++;
+
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    finally {
+                        try {
+                            if (fis!=null) {
+                                fis.close();
+                            }
+                                Files.delete(file.toPath());
+                            clear();
+
+
+
+
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+        }
+        return Constants.MANAGEMENT_PAGE;
+    }
+
+    public boolean isImageExists(){
+        return image!=null;
+    }
+
+    public void clear(){
+        productName=null;
+        description=null;
+        price=0;
+        availableQuantity=0;
+        isForSale=true;
+        discount=0;
+        categories=new ArrayList<>();
+        image=null;
+        is=null;
+        fis=null;
+        file=null;
     }
 }

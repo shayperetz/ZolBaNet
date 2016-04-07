@@ -6,4 +6,15 @@
     <lifecycle>
         <phase-listener>org.es.zolbareshet.test.LifeCycleListener</phase-listener>
     </lifecycle>
+    <lifecycle>
+        <phase-listener>org.es.zolbareshet.JsfHelpers.credentials.AuthorizationListener</phase-listener>
+    </lifecycle>
+    <application>
+        <navigation-handler>org.es.zolbareshet.JsfHelpers.helpers.CustomNavigationHandler</navigation-handler>
+    </application>
+    <factory>
+        <exception-handler-factory>
+            org.es.zolbareshet.JsfHelpers.helpers.CustomExceptionHandlerFactory
+        </exception-handler-factory>
+    </factory>
 </faces-config>
