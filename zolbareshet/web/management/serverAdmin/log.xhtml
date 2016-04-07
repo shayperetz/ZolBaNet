@@ -1,0 +1,19 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <p class="sectionTytle"> Server.log</p>
+    <h:form>
+    <h:commandButton value="Clear Log" class="styled-button" style="margin-left: 35em;" action="#{managerPageHelperBean.clearLog()}" onclick="return confirm('This will delete the content of the log file, do you confirm this action?')">
+    <f:ajax render="@form"/>
+    </h:commandButton>
+    </h:form>
+    <br/><br/>
+    <ui:repeat value="#{managerPageHelperBean.readLog()}" var="line">
+        <h:outputText value="#{line.getKey()}" />
+        <br/>
+    </ui:repeat>
+
+</ui:composition>
+

@@ -1,0 +1,76 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <p class="sectionTytle"> Add New Product</p>
+    <h:form id="proID" enctype="multipart/form-data">
+        <h:panelGrid columns="8" >
+            <h:outputText value="ProductID"  />
+            <h:inputText id="productid" size="8" value="#{product.productNumber}"  disabled="true">
+            </h:inputText>
+            <h:outputText value="Product Name"/>
+            <h:inputText id="productName" required="true" requiredMessage="Please enter the product name" value="#{product.productName}" autocomplete="off"
+                         validatorMessage="Product name can contain only letters and numbers and must be fewer than 30 characters">
+                <f:validateLength maximum="30"/>
+                <f:validateRegex pattern="(\w*\d*)*"/>
+            </h:inputText>
+            <h:message id="productNameMessage" for="productName" styleClass="error" style="position: absolute; top: 120px; left: 100px;"/>
+            <h:outputText value="Description"/>
+            <h:inputTextarea id="description" cols="30" rows="10"  required="true" style="position: absolute; top: 80px;" requiredMessage="Please enter the description of the product" value="#{product.description}" autocomplete="off"
+                             validatorMessage="Description must be fewer than 200 characters">
+                <f:validateLength maximum="200"/>
+                <f:validateRegex pattern="(\w*\d*)*"/>
+            </h:inputTextarea>
+            <h:message id="descriptionMessage" for="description" styleClass="error"  style="position: absolute; top: 120px; left: 250px;"/>
+        </h:panelGrid>
+        <h:outputText value="Categories:" />
+        <h:selectManyCheckbox  id="categories" value="#{product.categories}" required="true"  requiredMessage="Mark The Categories This Product Belongs to">
+            <f:selectItems value="#{category.categoriesNames}"/>
+            <f:validator validatorId="noElementWasChosenValidator"/>
+        </h:selectManyCheckbox>
+        <h:message id="categoriesmsg" for="categories" styleClass="error"/>
+        <br/><br/>
+        <h:panelGrid columns="6">
+            <h:outputText value="Price in NIS"  />
+            <h:inputText id="price" size="6" value="#{product.price}" required="true" requiredMessage="Please enter the product price"  autocomplete="off"
+                         validatorMessage="Product price must be a positive number">
+                <f:validator validatorId="floatValidator"/>
+            </h:inputText>
+            <h:message id="pricemsg" for="price" styleClass="error"/>
+            <h:outputText value="Discount (%)"  />
+            <h:inputText id="discount" size="6" value="#{product.price}"  autocomplete="off"
+                         validatorMessage="Product discount must be a percent (0-100)">
+                <f:validator validatorId="floatDiscountValidator"/>
+            </h:inputText>
+            <h:message id="discountmsg" for="discount" styleClass="error"/>
+            <h:outputText value="ForSale"/>
+            <h:selectBooleanCheckbox id="forsale" value="#{product.forSale}" />
+        </h:panelGrid>
+        <br/>
+        <h:panelGrid columns="2">
+            <h:outputText value="Quantity Available"/>
+            <h:inputText id="quantity" size="6" value="#{product.availableQuantity}"  autocomplete="off" required="true" requiredMessage="please enter the available quantity of this product"
+                         validatorMessage="Product quantity must be a positive number">
+                <f:validator validatorId="positiveNumberValidator"/>
+            </h:inputText>
+            <h:message id="quantitymsg" for="quantity" styleClass="error"/>
+            <br/>
+            <h:outputText value="Image"/>
+            <h:inputFile id="file" value="#{product.image}" styleClass="styled-button" required="true" requiredMessage="please select the image file" validatorMessage="the image file must be less than 100 kb size">
+                <f:validator validatorId="fileValidator"/>
+            </h:inputFile>
+            <h:message id="filemsg" for="file" styleClass="error"/>
+            <h:graphicImage id="showphoto"
+                            style="float: left; padding-right: 10px"
+                            value="#{product.imageFromServlet}" rendered="#{product.imageExists}"/>
+        </h:panelGrid>
+
+        <h:commandButton value="Save" action="#{product.saveProduct}" styleClass="styled-button" >
+            <f:ajax execute="@form" render="@form"/>
+        </h:commandButton>
+
+
+    </h:form>
+
+</ui:composition>

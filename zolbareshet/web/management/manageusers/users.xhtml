@@ -1,0 +1,34 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:panelGrid columns="7" style="margin-left: 50px;">
+    <h:commandButton  immediate="true" value="Defined Super Users" class="#{managerPageNavigation.showListSuperusersSection || managerPageNavigation.showEditusersSection?'styled-pressed-button':'styled-button'}" action="#{managerPageNavigation.setShowListSuperusersSection()}">
+        <f:ajax render="@form"/>
+    </h:commandButton>
+    <h:outputText/>
+    <h:commandButton immediate="true" value="Create New SuperUser" class="#{managerPageNavigation.showNewSuperusersSection?'styled-pressed-button':'styled-button'}" action="#{managerPageNavigation.setShowNewSuperusersSection()}">
+        <f:ajax render="@form"/>
+    </h:commandButton>
+        <h:outputText/>
+        <h:commandButton immediate="true" value="Manage Regular Users" class="#{managerPageNavigation.showRegularUsersSection?'styled-pressed-button':'styled-button'}" action="#{managerPageNavigation.setShowRegularUsersSection()}">
+            <f:ajax render="@form"/>
+        </h:commandButton>
+    </h:panelGrid>
+    <div class="manager_page_section">
+        <h:panelGroup rendered="#{managerPageNavigation.showRegularUsersSection}">
+            <ui:include src="regularUsers.xhtml" />
+        </h:panelGroup>
+    </div>
+    <div class="manager_page_section">
+        <h:panelGroup rendered="#{managerPageNavigation.showListSuperusersSection and !managerPageNavigation.showEditusersSection}">
+            <ui:include src="superusersList.xhtml" />
+        </h:panelGroup>
+    </div>
+    <div class="manager_page_section">
+        <h:panelGroup rendered="#{managerPageNavigation.showNewSuperusersSection || managerPageNavigation.showEditusersSection}">
+            <ui:include src="newSuperuser.xhtml" />
+        </h:panelGroup>
+    </div>
+</ui:composition>
