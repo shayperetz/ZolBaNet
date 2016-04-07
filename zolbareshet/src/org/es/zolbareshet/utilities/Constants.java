@@ -1,5 +1,6 @@
 package org.es.zolbareshet.utilities;
 
+import org.es.zolbareshet.queries.Parameter;
 import org.es.zolbareshet.queries.QueriesHandler;
 
 /**
@@ -41,6 +42,23 @@ public class Constants {
     //--------------PAGES NAMES---------------------------
     public static final String REGISTRATION_PAGE="/accounting/registration";
     public static final String MANAGEMENT_PAGE="/management/management";
+    public static final String FORBIDDEN_PAGE ="forbiddenPage";
+    public static final String MAIN_PAGE = "main";
+    public static final String NEW_SUPER_PAGE = "/management/newSuperuser";
+
+    //--------------ROLES---------------------------------------------
+    public static final int ADMINISTRATOR = 1;
+    public static final int STOREKEEPER = 2;
+    public static final int CUSTOMER = 3;
+
+    //-----------PHONE TYPES---------------------------------------
+    public static final int HOME = 1;
+    public static final int MOBILE = 2;
+    public static final int WORK = 3;
+
+    //--------------------GENDER------------------------------------
+    public static final int MALE = 1;
+    public static final int FEMALE= 2;
 
 
     //--------------DATABASE TABLES-------------------------------
@@ -53,6 +71,14 @@ public class Constants {
     public static final String TABLE_PRODUCTS = "Products" ;
     public static final String TABLE_PHONE_NUMBER = "Phone_Number" ;
     public static final String TABLE_USER_NAME = "Users" ;
+    public static final String TABLE_CONFIGURATIONS = "config";
+
+    //--------------DATABASE CONFIG FIELDS------------------------
+    public static final String NEXT_PRODUCT_NUMBER = "Next_Product_Number";
+    //---------------------INDEXES---------------------------------
+    public static final int INDEX_NEXT_PRODUCT_NUMBER_TABLE_CONFIG = 1;
+    //--------------------TYPES-----------------------------------
+    public static final Parameter.TYPE TYPE_NEXT_PRODUCT_NUMBER_TABLE_CONFIG = Parameter.TYPE.LONG;
 
     //--------------DATABASE USER FIELDS--------------------------
     public static final String USER_NAME = "User_Nmae" ; 
@@ -86,6 +112,22 @@ public class Constants {
     public static final int INDEX_BIRTH_DATE_TABLE_USERS   = 13 ;
     public static final int INDEX_USER_TYPE_TABLE_USERS    = 14 ;
     public static final int INDEX_GENDER_TABLE_USERS       = 15 ;
+    //--------------------TYPES-----------------------------------
+    public static final Parameter.TYPE TYPE_USER_NAME_TABLE_USERS    = Parameter.TYPE.STRING ;
+    public static final Parameter.TYPE TYPE_FIRST_NAME_TABLE_USERS   = Parameter.TYPE.STRING  ;
+    public static final Parameter.TYPE TYPE_LAST_NAME_TABLE_USERS    = Parameter.TYPE.STRING  ;
+    public static final Parameter.TYPE TYPE_PASSWORD_TABLE_USERS     = Parameter.TYPE.STRING  ;
+    public static final Parameter.TYPE TYPE_IS_ACTIVE_TABLE_USERS    = Parameter.TYPE.BOOLEAN  ;
+    public static final Parameter.TYPE TYPE_COUNTRY_TABLE_USERS      = Parameter.TYPE.STRING  ;
+    public static final Parameter.TYPE TYPE_CITY_TABLE_USERS         = Parameter.TYPE.STRING  ;
+    public static final Parameter.TYPE TYPE_STREET_TABLE_USERS       = Parameter.TYPE.STRING  ;
+    public static final Parameter.TYPE TYPE_HOUSE_NUMBER_TABLE_USERS = Parameter.TYPE.STRING  ;
+    public static final Parameter.TYPE TYPE_FLOOR_NUMBER_TABLE_USERS = Parameter.TYPE.INT ;
+    public static final Parameter.TYPE TYPE_ZIP_CODE_TABLE_USERS     = Parameter.TYPE.INT ;
+    public static final Parameter.TYPE TYPE_EMAIL_TABLE_USERS        = Parameter.TYPE.STRING ;
+    public static final Parameter.TYPE TYPE_BIRTH_DATE_TABLE_USERS   = Parameter.TYPE.DATE ;
+    public static final Parameter.TYPE TYPE_USER_TYPE_TABLE_USERS    = Parameter.TYPE.INT ;
+    public static final Parameter.TYPE TYPE_GENDER_TABLE_USERS       = Parameter.TYPE.INT ;
     
     //--------------DATABASE PHONE NUMBER FIELDS------------------
     public static final String PREFIX  = "prefix" ; 
@@ -96,6 +138,11 @@ public class Constants {
     public static final int INDEX_PREFIX_TABLE_PHONES       = 2 ;
     public static final int INDEX_PHONE_NUMBER_TABLE_PHONES = 3 ;
     public static final int INDEX_PHONE_TYPE_TABLE_PHONES   = 4 ;
+    //--------------------TYPES-----------------------------------
+    public static final Parameter.TYPE TYPE_USER_NAME_TABLE_PHONES    = Parameter.TYPE.STRING ;
+    public static final Parameter.TYPE TYPE_PREFIX_TABLE_PHONES       = Parameter.TYPE.STRING ;
+    public static final Parameter.TYPE TYPE_PHONE_NUMBER_TABLE_PHONES = Parameter.TYPE.STRING ;
+    public static final Parameter.TYPE TYPE_PHONE_TYPE_TABLE_PHONES   = Parameter.TYPE.STRING ;
 
     //--------------DATABASE PRODUCT FIELDS-------------------------
     public static final String PRODUCT_NUMBER = "Product_Number" ; 
@@ -106,6 +153,7 @@ public class Constants {
     public static final String IS_FOR_SALE = "Is_For_Sale" ; 
     public static final String DISCOUNT = "Discount" ; 
     public static final String PRODUCT_CATEGORY = "ProductCategory" ;
+    public static final String IMAGE = "Image";
     //----------------INDEXES--------------------------------------
     public static final int INDEX_PRODUCT_NUMBER_TABLE_PRODUCTS        = 1 ;
     public static final int INDEX_RODUCT_NAME_TABLE_PRODUCTS           = 2 ;
@@ -115,6 +163,17 @@ public class Constants {
     public static final int INDEX_IS_FOR_SALE_TABLE_PRODUCTS           = 6 ;
     public static final int INDEX_DISCOUNT_TABLE_PRODUCTS              = 7 ;
     public static final int INDEX_PRODUCT_CATEGORY_TABLE_PRODUCTS      = 8 ;
+    public static final int INDEX_PRODUCT_IMAGE_TABLE_PRODUCTS         = 9 ;
+    //--------------------TYPES-----------------------------------
+    public static final Parameter.TYPE TYPE_PRODUCT_NUMBER_TABLE_PRODUCTS        = Parameter.TYPE.FLOAT ;
+    public static final Parameter.TYPE TYPE_RODUCT_NAME_TABLE_PRODUCTS           = Parameter.TYPE.STRING ;
+    public static final Parameter.TYPE TYPE_PRODUCT_DESCRIPTION_TABLE_PRODUCTS   = Parameter.TYPE.STRING ;
+    public static final Parameter.TYPE TYPE_PRICE_TABLE_PRODUCTS                 = Parameter.TYPE.FLOAT ;
+    public static final Parameter.TYPE TYPE_AVAILABLE_QUANTITY_TABLE_PRODUCTS    = Parameter.TYPE.INT ;
+    public static final Parameter.TYPE TYPE_IS_FOR_SALE_TABLE_PRODUCTS           = Parameter.TYPE.BOOLEAN ;
+    public static final Parameter.TYPE TYPE_DISCOUNT_TABLE_PRODUCTS              = Parameter.TYPE.FLOAT ;
+    public static final Parameter.TYPE TYPE_PRODUCT_CATEGORY_TABLE_PRODUCTS      = Parameter.TYPE.STRING ; ;
+    public static final Parameter.TYPE TYPE_PRODUCT_IMAGE_TABLE_PRODUCTS         = Parameter.TYPE.BYTES;
 
     //--------------DATABASE ORDERS FIELDS------------------------
     public static final String ORDER_ID = "Order_ID" ; 
@@ -122,10 +181,15 @@ public class Constants {
     public static final String ORDER_TIME = "Order_Time" ; 
     public static final String TOTAL_PAY = "Total_Pay";
     //--------------------------------INDEXES-----------------------
-    public static final int INDEX_ORDER_ID_TABLE_ORDERS   = 1 ;
-    public static final int INDEX_ORDER_DATE_TABLE_ORDERS = 2 ;
-    public static final int INDEX_ORDER_TIME_TABLE_ORDERS = 3 ;
+    public static final int INDEX_USER_NAME_TABLE_ORDERS  = 1 ;
+    public static final int INDEX_ORDER_ID_TABLE_ORDERS   = 2 ;
+    public static final int INDEX_ORDER_DATE_TABLE_ORDERS = 3 ;
     public static final int INDEX_TOTAL_PAY_TABLE_ORDERS  = 4 ;
+    //--------------------TYPES-----------------------------------
+    public static final Parameter.TYPE TYPE_USER_NAME_TABLE_ORDERS    = Parameter.TYPE.STRING ;
+    public static final Parameter.TYPE TYPE_ORDER_ID_TABLE_ORDERS   = Parameter.TYPE.FLOAT ;
+    public static final Parameter.TYPE TYPE_ORDER_DATE_TABLE_ORDERS = Parameter.TYPE.DATE ;
+    public static final Parameter.TYPE TYPE_TOTAL_PAY_TABLE_ORDERS  = Parameter.TYPE.FLOAT ;
 
     //--------------DATABASE ORDER CONTENT FIELDS-----------------
     public static final String QUANTITY = "Quntity" ;
@@ -134,11 +198,18 @@ public class Constants {
     public static final int INDEX_RODUCT_NUMBER_TABLE_ORDERS_CONTENT  = 2 ;
     public static final int INDEX_ORDER_ID_TABLE_ORDERS_CONTENT       = 3 ;
     public static final int INDEX_QUANTITY_TABLE_ORDERS_CONTENT       = 4 ;
+    //--------------------TYPES-----------------------------------
+    public static final Parameter.TYPE TYPE_USER_NAME_TABLE_ORDERS_CONTENT      = Parameter.TYPE.STRING ;
+    public static final Parameter.TYPE TYPE_RODUCT_NUMBER_TABLE_ORDERS_CONTENT  = Parameter.TYPE.FLOAT ;
+    public static final Parameter.TYPE TYPE_ORDER_ID_TABLE_ORDERS_CONTENT       = Parameter.TYPE.FLOAT ;
+    public static final Parameter.TYPE TYPE_QUANTITY_TABLE_ORDERS_CONTENT       = Parameter.TYPE.INT ;
 
     //--------------DATABASE COUNTRIES FIELDS---------------------
     public static final String COUNTRY_NAME="Countrie_Name";
     //------------------------------INDEXES-------------------------
-    public static final int INDEX_COUNTRY_NAME_TABLE_COUNTRIES       = 1 ;
+    public static final int INDEX_COUNTRY_NAME_TABLE_COUNTRIES   = 1 ;
+    //--------------------TYPES-----------------------------------
+    public static final Parameter.TYPE TYPE_COUNTRY_NAME_TABLE_COUNTRIES   = Parameter.TYPE.STRING;
 
     //--------------DATABASE CLIENT PAYMENTS FIELDS---------------
     public static final String USER_ID = "User_ID" ; 
@@ -151,22 +222,36 @@ public class Constants {
     public static final int INDEX_CARD_NUMBER_TABLE_CLIENT_PAYMENT   = 3 ;
     public static final int INDEX_CARD_TYPE_TABLE_CLIENT_PAYMENT     = 4 ;
     public static final int INDEX_EX_DATE_TABLE_CLIENT_PAYMENT       = 5 ;
+    //--------------------TYPES-----------------------------------
+    public static final Parameter.TYPE TYPE_USER_NAME_TABLE_CLIENT_PAYMENT     = Parameter.TYPE.STRING ;
+    public static final Parameter.TYPE TYPE_USER_ID_TABLE_CLIENT_PAYMENT       = Parameter.TYPE.INT ;
+    public static final Parameter.TYPE TYPE_CARD_NUMBER_TABLE_CLIENT_PAYMENT   = Parameter.TYPE.FLOAT ;
+    public static final Parameter.TYPE TYPE_CARD_TYPE_TABLE_CLIENT_PAYMENT     = Parameter.TYPE.INT ;
+    public static final Parameter.TYPE TYPE_EX_DATE_TABLE_CLIENT_PAYMENT       = Parameter.TYPE.DATE ;
+
 
     //--------------DATABASE CART FIELDS--------------------------
     //---------------------INDEXES---------------------------------
     public static final int INDEX_USER_NAME_TABLE_CARTS      = 1 ;
     public static final int INDEX_RODUCT_NUMBER_TABLE_CARTS  = 2 ;
     public static final int INDEX_QUANTITY_TABLE_CARTS       = 3 ;
+    //--------------------TYPES-----------------------------------
+    public static final Parameter.TYPE TYPE_USER_NAME_TABLE_CARTS      = Parameter.TYPE.STRING ;
+    public static final Parameter.TYPE TYPE_RODUCT_NUMBER_TABLE_CARTS  = Parameter.TYPE.FLOAT ;
+    public static final Parameter.TYPE TYPE_QUANTITY_TABLE_CARTS       = Parameter.TYPE.FLOAT ;
 
     //--------------DATABASE CATEGORY FIELDS----------------------
     public static final String CATEGORY = "Category" ;
     //-----------------------------INDEXES-------------------------
-    public static final int INDEX_CATEGORY_TABLE_CATEGORY     = 1 ;
+    public static final int INDEX_CATEGORY_TABLE_CATEGORY         = 1 ;
+    public static final int INDEX_CATEGORY_IMAGE_TABLE_CATEGORY   = 2 ;
+    //--------------------TYPES-----------------------------------
+    public static final Parameter.TYPE TYPE_CATEGORY_TABLE_CATEGORY         = Parameter.TYPE.STRING ;
+    public static final Parameter.TYPE TYPE_CATEGORY_IMAGE_TABLE_CATEGORY  = Parameter.TYPE.BYTES;
 
 
 
 
-   
 
 
 
@@ -175,6 +260,6 @@ public class Constants {
 
 
 
-     
-     
+
+
 }
