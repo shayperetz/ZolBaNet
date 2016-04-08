@@ -6,12 +6,8 @@ import org.es.zolbareshet.queries.QueriesHandler;
 import org.es.zolbareshet.queries.SimpleQueryInvoker;
 import org.es.zolbareshet.services.Service;
 import org.es.zolbareshet.services.ServiceManager;
-import org.es.zolbareshet.utilities.Constants;
 import org.es.zolbareshet.utilities.PropertiesFileManager;
-
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.*;
