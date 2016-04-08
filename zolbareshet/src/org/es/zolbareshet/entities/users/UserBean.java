@@ -3,9 +3,9 @@ package org.es.zolbareshet.entities.users;
 
 
 import org.es.zolbareshet.JsfHelpers.helpers.ManagerPageNavigation;
-import org.es.zolbareshet.entities.payments.CreditCard;
 import org.es.zolbareshet.logging.MainLogger;
-import org.es.zolbareshet.entities.orders.Cart;
+import org.es.zolbareshet.orders.Cart;
+import org.es.zolbareshet.payments.CreditCard;
 import org.es.zolbareshet.queries.SimpleQueryInvoker;
 import org.es.zolbareshet.utilities.Constants;
 import org.es.zolbareshet.utilities.Utils;

@@ -2,7 +2,6 @@ package org.es.zolbareshet.orders;
 
 
 
-import org.es.zolbareshet.entities.orders.*;
 import org.es.zolbareshet.entities.products.Product;
 import org.es.zolbareshet.entities.users.User;
 import org.es.zolbareshet.logging.Logger;
@@ -15,7 +14,7 @@ import java.util.*;
 
 @ManagedBean
 @SessionScoped
-public class Order extends org.es.zolbareshet.entities.orders.AbstractOrder {
+public class Order extends AbstractOrder {
 
     private long  orderID ;
     private boolean closed = false;
@@ -45,7 +44,25 @@ public class Order extends org.es.zolbareshet.entities.orders.AbstractOrder {
         return closed;
     }
 
+    @Override
+    public boolean addProduct(Product p, int quantity) {
+        return false;
+    }
 
+    @Override
+    public boolean removeProduct(Product p) {
+        return false;
+    }
+
+    @Override
+    public boolean incrementProductQuantity(Product p, int quantity) {
+        return false;
+    }
+
+    @Override
+    public boolean decrementProductQuantity(Product p, int quantity) {
+        return false;
+    }
 
     public boolean commitOrder() {
         return false;

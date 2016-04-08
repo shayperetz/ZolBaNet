@@ -24,7 +24,6 @@ public class Product {
     private ArrayList<String> categories;
     private Part image;
     private int imagesize;
-    private static long nextProductNumber=0L;
 
     //for uploading image
     private  InputStream is = null;
@@ -37,13 +36,11 @@ public class Product {
    }
 
     public synchronized static long getNextProductNumber() {
-        return nextProductNumber;
+        return SimpleQueryInvoker.getNextProductNuber();
     }
 
 
-    public synchronized static void incrementNextProductNumber(){
-        nextProductNumber++;
-    }
+    public synchronized static void incrementNextProductNumber(){ SimpleQueryInvoker.incrementProductNumber();}
 
     public long getProductNumber() {
         return productNumber;
@@ -145,7 +142,7 @@ public class Product {
             try {
                         fis= new FileInputStream(file);
                         SimpleQueryInvoker.addProduct(productNumber,productName,description,price,availableQuantity,discount, isForSale, fis, imagesize);
-                        nextProductNumber++;
+                        incrementNextProductNumber();
 
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();

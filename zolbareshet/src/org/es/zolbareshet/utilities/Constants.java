@@ -21,6 +21,8 @@ public class Constants {
     
     //--------QUERIES------------------------------------
 
+    public static final String GET_NEXT_PRODUCT_NUMBER="SELECT "+ Constants.VALUE +" FROM " + Constants.TABLE_CONFIG +" WHERE " + Constants.CONFIGURATION+ "=" + Constants.NEXT_PRODUCT_NUMBER;
+    public static final String INCREMENT_PRODUCT_NUMBER = "UPDATE " + Constants.TABLE_CONFIG +" set " + Constants.VALUE + "= ? WHERE " + Constants.CONFIGURATION + "=" + Constants.NEXT_PRODUCT_NUMBER;
     public static final String CHECKING_NEW_USER_NICKNAME_REGISTRATION_QUERY="";
     public static final String CHECKING_NEW_USER_EMAIL_REGISTRATION_QUERY="";
     public static final String ADD_NEW_USER_QUERY="";
@@ -60,6 +62,13 @@ public class Constants {
     public static final int MALE = 1;
     public static final int FEMALE= 2;
 
+    //--------------------ORDER/CART-----------------------------
+    public static final int ORDER = 1;
+    public static final int CART = 2;
+
+    //-------------CONFIGURATION STORED IN DB-------------------
+    public static final String NEXT_PRODUCT_NUMBER = "Next_Product_Number";
+
 
     //--------------DATABASE TABLES-------------------------------
     public static final String TABLE_CATEGORY ="Category";
@@ -71,14 +80,17 @@ public class Constants {
     public static final String TABLE_PRODUCTS = "Products" ;
     public static final String TABLE_PHONE_NUMBER = "Phone_Number" ;
     public static final String TABLE_USER_NAME = "Users" ;
-    public static final String TABLE_CONFIGURATIONS = "config";
+    public static final String TABLE_CONFIG = "config";
 
     //--------------DATABASE CONFIG FIELDS------------------------
-    public static final String NEXT_PRODUCT_NUMBER = "Next_Product_Number";
+    public static final String CONFIGURATION = "configuration";
+    public static final String VALUE = "value";
     //---------------------INDEXES---------------------------------
-    public static final int INDEX_NEXT_PRODUCT_NUMBER_TABLE_CONFIG = 1;
+    public static final int INDEX_CONFIGURATION_TABLE_CONFIG = 1;
+    public static final int INDEX_VALUE_TABLE_CONFIG = 2;
     //--------------------TYPES-----------------------------------
-    public static final Parameter.TYPE TYPE_NEXT_PRODUCT_NUMBER_TABLE_CONFIG = Parameter.TYPE.LONG;
+    public static final Parameter.TYPE TYPE_CONFIGURATION_TABLE_CONFIG = Parameter.TYPE.STRING;
+    public static final Parameter.TYPE TYPE_VALUE_TABLE_CONFIG = Parameter.TYPE.STRING;
 
     //--------------DATABASE USER FIELDS--------------------------
     public static final String USER_NAME = "User_Nmae" ; 
@@ -193,16 +205,18 @@ public class Constants {
 
     //--------------DATABASE ORDER CONTENT FIELDS-----------------
     public static final String QUANTITY = "Quntity" ;
+    public static final String ORDER_OR_CART = "OrderOrCart" ;
     //-----------------------------INDEXES-----------------
-    public static final int INDEX_USER_NAME_TABLE_ORDERS_CONTENT      = 1 ;
-    public static final int INDEX_RODUCT_NUMBER_TABLE_ORDERS_CONTENT  = 2 ;
-    public static final int INDEX_ORDER_ID_TABLE_ORDERS_CONTENT       = 3 ;
-    public static final int INDEX_QUANTITY_TABLE_ORDERS_CONTENT       = 4 ;
+    public static final int INDEX_RODUCT_NUMBER_TABLE_ORDERS_CONTENT  = 1 ;
+    public static final int INDEX_ORDER_ID_TABLE_ORDERS_CONTENT       = 2 ;
+    public static final int INDEX_QUANTITY_TABLE_ORDERS_CONTENT       = 3 ;
+    public static final int INDEX_ORDER_OR_CART_TABLE_ORDERS = 4 ;
     //--------------------TYPES-----------------------------------
-    public static final Parameter.TYPE TYPE_USER_NAME_TABLE_ORDERS_CONTENT      = Parameter.TYPE.STRING ;
     public static final Parameter.TYPE TYPE_RODUCT_NUMBER_TABLE_ORDERS_CONTENT  = Parameter.TYPE.FLOAT ;
     public static final Parameter.TYPE TYPE_ORDER_ID_TABLE_ORDERS_CONTENT       = Parameter.TYPE.FLOAT ;
     public static final Parameter.TYPE TYPE_QUANTITY_TABLE_ORDERS_CONTENT       = Parameter.TYPE.INT ;
+    public static final Parameter.TYPE TYPE_ORDER_OR_CART_TABLE_ORDERS          = Parameter.TYPE.INT ;
+
 
     //--------------DATABASE COUNTRIES FIELDS---------------------
     public static final String COUNTRY_NAME="Countrie_Name";
