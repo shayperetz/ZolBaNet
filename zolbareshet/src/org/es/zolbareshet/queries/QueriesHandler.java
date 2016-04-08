@@ -1,6 +1,5 @@
 package org.es.zolbareshet.queries;
 
-import com.sun.deploy.security.ValidationState;
 import org.es.zolbareshet.logging.Logger;
 import org.es.zolbareshet.logging.LoggerFactory;
 import org.es.zolbareshet.logging.MainLogger;
