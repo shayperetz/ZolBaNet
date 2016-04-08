@@ -2,10 +2,11 @@ package org.es.zolbareshet.entities.users;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class UserInfo {
+public class UserInfo implements Serializable{
     public enum gender{MALE,FEMALE};
     private gender userGender;
     private Date birthDate;

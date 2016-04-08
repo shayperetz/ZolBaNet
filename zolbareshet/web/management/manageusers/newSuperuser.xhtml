@@ -91,7 +91,7 @@
                 <f:selectItems value="#{userBean.getRoles()}"/>
             </h:selectOneMenu>
         </h:panelGrid>
-        <h:commandButton class="styled-button" value="#{managerPageNavigation.showEditusersSection?'Save':'Register'}" action="#{userBean.register}" >
+        <h:commandButton class="styled-button" value="#{managerPageNavigationBean.showEditusersSection?'Save':'Register'}" action="#{userBean.register}" >
             <f:ajax execute="@form" render="@form"/>
         </h:commandButton>
         <h:commandButton class="styled-button" value="Save" onclick="" style="display: none;" >

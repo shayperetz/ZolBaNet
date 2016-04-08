@@ -10,12 +10,13 @@ import org.es.zolbareshet.utilities.PropertiesFileManager;
 import javax.faces.bean.ManagedBean;
 import java.awt.*;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 import java.util.List;
 
 
 @ManagedBean
-public class ManagerPageHelperBean {
+public class ManagerPageHelperBean implements Serializable{
 
     public static void openConfigFile(){
         Desktop desktop = Desktop.getDesktop();
@@ -47,11 +48,13 @@ public class ManagerPageHelperBean {
     public static ArrayList<ArrayList<String>> getSuperUsers(){
         ArrayList<QueriesHandler.ResultLine> result = SimpleQueryInvoker.getAllSuperUsers();
         ArrayList<ArrayList<String>> superusers = new ArrayList<>();
-        for (QueriesHandler.ResultLine r: result){
-                ArrayList<String> list = new ArrayList<String >();
-                list.add((String)r.getContent().get(0));
-                list.add((String)r.getContent().get(1));
-                superusers.add(list);
+        if(result!=null){
+        for (QueriesHandler.ResultLine r: result) {
+            ArrayList<String> list = new ArrayList<String>();
+            list.add((String) r.getContent().get(0));
+            list.add((String) r.getContent().get(1));
+            superusers.add(list);
+        }
 
         }
         return superusers;

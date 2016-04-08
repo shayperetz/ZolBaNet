@@ -13,7 +13,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
 @ManagedBean
-public class Product {
+public class ProductBean implements Serializable{
     private long productNumber;
     private String productName;
     private String description;
@@ -31,8 +31,8 @@ public class Product {
     private FileInputStream fis=null;
 
 
-    public Product(){
-       setProductNumber(getNextProductNumber());
+    public ProductBean(){
+       //setProductNumber(getNextProductNumber());
    }
 
     public synchronized static long getNextProductNumber() {

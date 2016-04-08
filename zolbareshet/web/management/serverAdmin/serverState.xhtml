@@ -4,31 +4,31 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:panelGrid columns="7" style="margin-left:  50px;">
-        <h:commandButton  id="logButton" class="#{managerPageNavigation.showLogSection?'styled-pressed-button':'styled-button'}" value="open server log file" action="#{managerPageNavigation.setShowLogSection()}">
+        <h:commandButton id="logButton" class="#{managerPageNavigationBean.showLogSection?'styled-pressed-button':'styled-button'}" value="open server log file" action="#{managerPageNavigationBean.setShowLogSection()}">
             <f:ajax render="@form"/>
         </h:commandButton>
         <h:outputText/>
-        <h:commandButton id="configButton" class="#{managerPageNavigation.showConfigurationSection?'styled-pressed-button':'styled-button'}" value="open server configuration file" action="#{managerPageNavigation.setShowConfigurationSection()}">
+        <h:commandButton id="configButton" class="#{managerPageNavigationBean.showConfigurationSection?'styled-pressed-button':'styled-button'}" value="open server configuration file" action="#{managerPageNavigationBean.setShowConfigurationSection()}">
             <f:ajax render="@form"/>
         </h:commandButton>
         <h:outputText/>
-        <h:commandButton id="servicesButton" class="#{managerPageNavigation.showServiceSection?'styled-pressed-button':'styled-button'}" value="show running services" action="#{managerPageNavigation.setShowServiceSection()}">
+        <h:commandButton id="servicesButton" class="#{managerPageNavigationBean.showServiceSection?'styled-pressed-button':'styled-button'}" value="show running services" action="#{managerPageNavigationBean.setShowServiceSection()}">
             <f:ajax render="@form"/>
         </h:commandButton>
         <h:outputText/>
     </h:panelGrid>
     <div class="manager_page_section">
-        <h:panelGroup rendered="#{managerPageNavigation.showLogSection}">
+        <h:panelGroup rendered="#{managerPageNavigationBean.showLogSection}">
             <ui:include src="log.xhtml" />
         </h:panelGroup>
     </div>
     <div class="manager_page_section">
-        <h:panelGroup rendered="#{managerPageNavigation.showConfigurationSection}">
+        <h:panelGroup rendered="#{managerPageNavigationBean.showConfigurationSection}">
             <ui:include src="config.xhtml" />
         </h:panelGroup>
     </div>
     <div class="manager_page_section">
-    <h:panelGroup rendered="#{managerPageNavigation.showServiceSection}">
+    <h:panelGroup rendered="#{managerPageNavigationBean.showServiceSection}">
         <ui:include src="services.xhtml" />
     </h:panelGroup>
 </div>

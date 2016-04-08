@@ -3,10 +3,11 @@ package org.es.zolbareshet.entities.users;
 import org.es.zolbareshet.utilities.Constants;
 
 import javax.faces.bean.ManagedBean;
+import java.io.Serializable;
 
 
 @ManagedBean
-public class PhoneBean {
+public class PhoneBean implements Serializable{
 
     public enum phoneType {Home,Work, Mobile};
     private String perfix;

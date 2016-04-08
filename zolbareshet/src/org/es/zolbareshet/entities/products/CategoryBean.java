@@ -3,29 +3,25 @@ package org.es.zolbareshet.entities.products;
 
 import org.es.zolbareshet.queries.QueriesHandler;
 import org.es.zolbareshet.queries.SimpleQueryInvoker;
-import org.es.zolbareshet.utilities.Constants;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.Serializable;
 import java.util.*;
 
-import static jdk.nashorn.internal.codegen.CompilerConstants.CONSTANTS;
-
 @ManagedBean
-public class Category {
+public class CategoryBean implements Serializable{
     private String name;
     private byte[] image;
     private static Map<String,byte[]> categories;
     private static boolean initialized=false;
 
 
-public Category(){
+public CategoryBean(){
 
 }
 
-    public Category(String name, byte[] image) {
+    public CategoryBean(String name, byte[] image) {
         this.name = name;
         this.image = image;
     }
@@ -35,8 +31,10 @@ public Category(){
        if(!initialized) {
            categories = new HashMap<>();
            ArrayList<QueriesHandler.ResultLine> catList = SimpleQueryInvoker.getAllCategories();
-           for (QueriesHandler.ResultLine r : catList) {
-               categories.put((String) r.getContent().get(0), (byte[]) r.getContent().get(1));
+           if(catList!=null) {
+               for (QueriesHandler.ResultLine r : catList) {
+                   categories.put((String) r.getContent().get(0), (byte[]) r.getContent().get(1));
+               }
            }
            initialized=true;
        }
@@ -63,7 +61,7 @@ public Category(){
     }
 
     public  void setCategories(Map<String, byte[]> categories) {
-        Category.categories = categories;
+        CategoryBean.categories = categories;
     }
 
     public ArrayList<String> getCategoriesNames(){
