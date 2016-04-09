@@ -2,7 +2,7 @@ package org.es.zolbareshet.entities.users;
 
 
 
-import org.es.zolbareshet.JsfHelpers.helpers.ManagerPageNavigation;
+import org.es.zolbareshet.JsfHelpers.helpers.ManagerPageNavigationBean;
 import org.es.zolbareshet.logging.MainLogger;
 import org.es.zolbareshet.orders.Cart;
 import org.es.zolbareshet.payments.CreditCard;
@@ -12,19 +12,20 @@ import org.es.zolbareshet.utilities.Utils;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 
 @ManagedBean
 @SessionScoped
-public class UserBean extends User {
+public class UserBean extends User implements Serializable{
     private CreditCard creditCard;
     private Cart cart;
     private Role role;
     private boolean nickNameAlreadyExists=false;
     private boolean emailAlreadyExists=false;
-    public enum Role {ADMINISTRATOR,STOREKEEPER,CUSTOMER};
+    public enum Role {ADMINISTRATOR,STOREKEEPER,CUSTOMER}
 
 
     public UserBean(){
@@ -150,7 +151,7 @@ public class UserBean extends User {
             getPhonesList().get(phoneIndex).setPhoneNumber((String)userDetails.get(index++));
             getPhonesList().get(phoneIndex++).setType(Integer.parseInt((String)userDetails.get(index++)));
         }
-        ManagerPageNavigation m = Utils.findBean("managerPageNavigation");
+        ManagerPageNavigationBean m = Utils.findBean("managerPageNavigation");
         m.changeContext(m.EDIT_USER);
     }
 }

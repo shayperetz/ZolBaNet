@@ -14,6 +14,7 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +22,7 @@ import java.util.Map;
 import java.util.function.IntBinaryOperator;
 
 @ManagedBean
-public class LoginController implements PhaseListener {
+public class LoginControllerBean implements PhaseListener, Serializable {
     public void securePage(){
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext externalContext = context.getExternalContext();

@@ -7,11 +7,12 @@ import org.es.zolbareshet.utilities.Constants;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean
-public class AddressBean {
+public class AddressBean implements Serializable{
     private String country;
     private String city;
     private String street;

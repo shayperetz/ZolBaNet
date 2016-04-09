@@ -9,12 +9,13 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 
 @ManagedBean
 @ViewScoped
-public class ManagerPageNavigation {
+public class ManagerPageNavigationBean implements Serializable{
     //main menu
     private final static String MANAGER = "manager";
     private final static String REPORT = "report";

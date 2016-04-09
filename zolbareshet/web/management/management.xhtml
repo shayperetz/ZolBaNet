@@ -5,7 +5,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
 <f:metadata>
-    <f:event type="preRenderView" listener="#{loginController.securePage}" />
+    <f:event type="preRenderView" listener="#{loginControllerBean.securePage}" />
     </f:metadata>
     <title>Management Page - Zol Bareshet</title>
     <h:outputStylesheet name="mystyles.css" library="css"/>
@@ -28,39 +28,39 @@
     <div class="content">
         <h:form enctype="multipart/form-data">
         <h:panelGrid style="position: absolute; left: 200px;" columns="7" id="buttons">
-            <h:commandButton immediate="true" id="managerButton" class="#{managerPageNavigation.showManagerSection?'styled-pressed-button':'styled-button'}" value="Manage Users" action="#{managerPageNavigation.setShowManagerSection()}">
+            <h:commandButton immediate="true" id="managerButton" class="#{managerPageNavigationBean.showManagerSection?'styled-pressed-button':'styled-button'}" value="Manage Users" action="#{managerPageNavigationBean.setShowManagerSection()}">
                 <f:ajax render="@form"/>
             </h:commandButton>
             <h:outputText/>
-            <h:commandButton immediate="true" id="productsButton" class="#{managerPageNavigation.showProductsSection?'styled-pressed-button':'styled-button'}" value="Manage Products" action="#{managerPageNavigation.setShowProductsSection()}">
+            <h:commandButton immediate="true" id="productsButton" class="#{managerPageNavigationBean.showProductsSection?'styled-pressed-button':'styled-button'}" value="Manage Products" action="#{managerPageNavigationBean.setShowProductsSection()}">
                 <f:ajax render="@form"/>
             </h:commandButton>
             <h:outputText/>
-            <h:commandButton immediate="true" id="reportsButton" class="#{managerPageNavigation.showReportSection?'styled-pressed-button':'styled-button'}" value="View Reports" action="#{managerPageNavigation.setShowReportSection()}">
+            <h:commandButton immediate="true" id="reportsButton" class="#{managerPageNavigationBean.showReportSection?'styled-pressed-button':'styled-button'}" value="View Reports" action="#{managerPageNavigationBean.setShowReportSection()}">
                 <f:ajax render="@form"/>
             </h:commandButton>
             <h:outputText/>
-            <h:commandButton immediate="true" id="stateButton" class="#{managerPageNavigation.showServerStateSection?'styled-pressed-button':'styled-button'}" value="Server State" action="#{managerPageNavigation.setShowServerStateSection()}">
+            <h:commandButton immediate="true" id="stateButton" class="#{managerPageNavigationBean.showServerStateSection?'styled-pressed-button':'styled-button'}" value="Server State" action="#{managerPageNavigationBean.setShowServerStateSection()}">
                 <f:ajax render="@form"/>
             </h:commandButton>
         </h:panelGrid>
             <div class="manager_page_section">
-            <h:panelGroup rendered="#{managerPageNavigation.showManagerSection}">
+            <h:panelGroup rendered="#{managerPageNavigationBean.showManagerSection}">
                 <ui:include src="manageusers/users.xhtml" />
             </h:panelGroup>
             </div>
             <div class="manager_page_section">
-            <h:panelGroup rendered="#{managerPageNavigation.showReportSection}">
+            <h:panelGroup rendered="#{managerPageNavigationBean.showReportSection}">
                 <ui:include src="reports/reports.xhtml" />
             </h:panelGroup>
             </div>
             <div class="manager_page_section">
-            <h:panelGroup rendered="#{managerPageNavigation.showProductsSection}">
+            <h:panelGroup rendered="#{managerPageNavigationBean.showProductsSection}">
                 <ui:include src="products/products.xhtml" />
             </h:panelGroup>
             </div>
             <div class="manager_page_section">
-                <h:panelGroup rendered="#{managerPageNavigation.showServerStateSection}">
+                <h:panelGroup rendered="#{managerPageNavigationBean.showServerStateSection}">
                     <ui:include src="serverAdmin/serverState.xhtml" />
                 </h:panelGroup>
             </div>

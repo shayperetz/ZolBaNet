@@ -4,30 +4,30 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:panelGrid columns="7" style="margin-left: 50px;">
-        <h:commandButton  immediate="true" value="Edit Existing Product" class="#{managerPageNavigation.showEditProductSection?'styled-pressed-button':'styled-button'}" action="#{managerPageNavigation.setShowEditProductSection()}">
+        <h:commandButton immediate="true" value="Edit Existing Product" class="#{managerPageNavigationBean.showEditProductSection?'styled-pressed-button':'styled-button'}" action="#{managerPageNavigationBean.setShowEditProductSection()}">
             <f:ajax render="@form"/>
         </h:commandButton>
         <h:outputText/>
-        <h:commandButton immediate="true" value="Create New Product" class="#{managerPageNavigation.showNewProductSection?'styled-pressed-button':'styled-button'}" action="#{managerPageNavigation.setShowNewProductSection()}">
+        <h:commandButton immediate="true" value="Create New Product" class="#{managerPageNavigationBean.showNewProductSection?'styled-pressed-button':'styled-button'}" action="#{managerPageNavigationBean.setShowNewProductSection()}">
             <f:ajax render="@form"/>
         </h:commandButton>
         <h:outputText/>
-        <h:commandButton immediate="true" value="Manage Categories" class="#{managerPageNavigation.showEditCategoriesSection?'styled-pressed-button':'styled-button'}" action="#{managerPageNavigation.setShowEditCategoriesSection()}">
+        <h:commandButton immediate="true" value="Manage Categories" class="#{managerPageNavigationBean.showEditCategoriesSection?'styled-pressed-button':'styled-button'}" action="#{managerPageNavigationBean.setShowEditCategoriesSection()}">
             <f:ajax render="@form"/>
         </h:commandButton>
     </h:panelGrid>
     <div class="manager_page_section">
-        <h:panelGroup rendered="#{managerPageNavigation.showEditCategoriesSection}">
+        <h:panelGroup rendered="#{managerPageNavigationBean.showEditCategoriesSection}">
             <ui:include src="categories.xhtml" />
         </h:panelGroup>
     </div>
     <div class="manager_page_section">
-        <h:panelGroup rendered="#{managerPageNavigation.showNewProductSection}">
+        <h:panelGroup rendered="#{managerPageNavigationBean.showNewProductSection}">
             <ui:include src="newproduct.xhtml" />
         </h:panelGroup>
     </div>
     <div class="manager_page_section">
-        <h:panelGroup rendered="#{managerPageNavigation.showEditProductSection}">
+        <h:panelGroup rendered="#{managerPageNavigationBean.showEditProductSection}">
             <ui:include src="editproduct.xhtml" />
         </h:panelGroup>
     </div>

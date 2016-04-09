@@ -4,10 +4,11 @@ import org.es.zolbareshet.logging.Logger;
 import org.es.zolbareshet.logging.LoggerFactory;
 
 import javax.faces.bean.ManagedProperty;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public abstract class User {
+public abstract class User implements Serializable{
     public final int MAXIMUM_NUMBER_OF_PHONES=4;
     private boolean isActive=true;
     private Name name;

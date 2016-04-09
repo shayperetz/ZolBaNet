@@ -1,6 +1,6 @@
 package org.es.zolbareshet.JsfHelpers.converters;
 
-import org.es.zolbareshet.entities.products.Category;
+import org.es.zolbareshet.entities.products.CategoryBean;
 import org.es.zolbareshet.queries.SimpleQueryInvoker;
 
 import javax.faces.component.UIComponent;
@@ -16,12 +16,12 @@ public class CategoryConverter implements Converter {
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String s) {
         byte[] image=SimpleQueryInvoker.getCategoryImage(s);
-        return new Category(s,image);
+        return new CategoryBean(s,image);
     }
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object o) {
-        return ((Category)o).getName();
+        return ((CategoryBean)o).getName();
     }
 
 

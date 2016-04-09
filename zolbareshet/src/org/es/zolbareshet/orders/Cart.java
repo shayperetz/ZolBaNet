@@ -1,6 +1,6 @@
 package org.es.zolbareshet.orders;
 
-import org.es.zolbareshet.entities.products.Product;
+import org.es.zolbareshet.entities.products.ProductBean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,22 +15,22 @@ public class Cart extends AbstractOrder{
     }
 
     @Override
-    public boolean addProduct(Product p, int quantity) {
+    public boolean addProduct(ProductBean p, int quantity) {
         return false;
     }
 
     @Override
-    public boolean removeProduct(Product p) {
+    public boolean removeProduct(ProductBean p) {
         return false;
     }
 
     @Override
-    public boolean incrementProductQuantity(Product p, int quantity) {
+    public boolean incrementProductQuantity(ProductBean p, int quantity) {
         return false;
     }
 
     @Override
-    public boolean decrementProductQuantity(Product p, int quantity) {
+    public boolean decrementProductQuantity(ProductBean p, int quantity) {
         return false;
     }
 }

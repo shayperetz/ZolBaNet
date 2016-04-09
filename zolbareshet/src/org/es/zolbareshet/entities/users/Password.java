@@ -1,13 +1,14 @@
 package org.es.zolbareshet.entities.users;
 
 import javax.faces.bean.ManagedBean;
+import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
 
-public class Password {
+public class Password implements Serializable{
     private byte[] encryptedPassword;
     private String password;
     public Password(){

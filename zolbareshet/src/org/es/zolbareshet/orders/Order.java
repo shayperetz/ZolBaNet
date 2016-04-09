@@ -2,7 +2,7 @@ package org.es.zolbareshet.orders;
 
 
 
-import org.es.zolbareshet.entities.products.Product;
+import org.es.zolbareshet.entities.products.ProductBean;
 import org.es.zolbareshet.entities.users.User;
 import org.es.zolbareshet.logging.Logger;
 import org.es.zolbareshet.logging.LoggerFactory;
@@ -22,7 +22,7 @@ public class Order extends AbstractOrder {
 
 
 
-    public Order(long orderID, boolean closed, User user, Date date, Map<Product, Integer> orderLines) {
+    public Order(long orderID, boolean closed, User user, Date date, Map<ProductBean, Integer> orderLines) {
         super(user,date,orderLines);
         this.orderID = orderID;
         this.closed = closed;
@@ -45,22 +45,22 @@ public class Order extends AbstractOrder {
     }
 
     @Override
-    public boolean addProduct(Product p, int quantity) {
+    public boolean addProduct(ProductBean p, int quantity) {
         return false;
     }
 
     @Override
-    public boolean removeProduct(Product p) {
+    public boolean removeProduct(ProductBean p) {
         return false;
     }
 
     @Override
-    public boolean incrementProductQuantity(Product p, int quantity) {
+    public boolean incrementProductQuantity(ProductBean p, int quantity) {
         return false;
     }
 
     @Override
-    public boolean decrementProductQuantity(Product p, int quantity) {
+    public boolean decrementProductQuantity(ProductBean p, int quantity) {
         return false;
     }
 
