@@ -89,7 +89,7 @@ public class InstallationQueries{
 
     public static final String CREATE_TABLE_ORDERS = "create table Orders (\n" +
             "UserName VARCHAR(20) NOT NULL,\n" +
-            "OrderID numeric(12,0) NOT NULL,\n" +
+            "OrderID SERIAL NOT NULL,\n" +
             "DateOrder Date NOT NULL,\n" +
             "TotalPay numeric(12,0) NOT NULL,\n" +
             "UNIQUE (OrderID),\n" +
@@ -98,7 +98,7 @@ public class InstallationQueries{
             ");" ;
 
     public static final String CREATE_TABLE_PRODUCTS="   create table Products (\n" +
-            "ProductNumber numeric(12,0) NOT NULL,\n" +
+            "ProductNumber SERIAL NOT NULL,\n" +
             "ProductName VARCHAR(20) NOT NULL,\n" +
             "Description Text  NOT NULL,\n" +
             "Price numeric(12,0) NOT NULL,\n" +
