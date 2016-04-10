@@ -12,8 +12,9 @@ import org.es.zolbareshet.utilities.Constants;
 public class DataBaseInstallationMainSteps {
   
    public static void main (String args []) throws IOException
+
     {
-        final String DataBasePath   = "C:\\ProgramData\\ZolBareshet\\CREATE_DATABASE.sql" ;
+        final String dataBasePath   = "C:\\ProgramData\\ZolBareshet\\CREATE_DATABASE.sql" ;
         if ( DataBaseInstaller.RunQuery(DataBasePath ))
         {
         tableCreator(Constants.CREATE_TABLE_USERS);

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 @ManagedBean
 public class ProductBean implements Serializable{
-    private long productNumber;
     private String productName;
     private String description;
     private float price;
@@ -24,6 +23,7 @@ public class ProductBean implements Serializable{
     private ArrayList<String> categories;
     private Part image;
     private int imagesize;
+    private int productNumber;
 
     //for uploading image
     private  InputStream is = null;
@@ -35,19 +35,8 @@ public class ProductBean implements Serializable{
        //setProductNumber(getNextProductNumber());
    }
 
-    public synchronized static long getNextProductNumber() {
-        return SimpleQueryInvoker.getNextProductNuber();
-    }
-
-
-    public synchronized static void incrementNextProductNumber(){ SimpleQueryInvoker.incrementProductNumber();}
-
-    public long getProductNumber() {
+    public int getProductNumber() {
         return productNumber;
-    }
-
-    public void setProductNumber(long productNumber) {
-        this.productNumber = productNumber;
     }
 
     public String getProductName() {
@@ -142,7 +131,7 @@ public class ProductBean implements Serializable{
             try {
                         fis= new FileInputStream(file);
                         SimpleQueryInvoker.addProduct(productNumber,productName,description,price,availableQuantity,discount, isForSale, fis, imagesize);
-                        incrementNextProductNumber();
+
 
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
