@@ -120,9 +120,7 @@ public class InstallationHelper {
     public static final String CREATE_TABLE_PRODUCTS="   create table Products (\n" +
 
             "ProductNumber SERIAL NOT NULL,\n" +
-
             "ProductNumber serial NOT NULL,\n" +
-
             "ProductName VARCHAR(20) NOT NULL,\n" +
             "Description Text  NOT NULL,\n" +
             "Price numeric(12,2) NOT NULL,\n" +
