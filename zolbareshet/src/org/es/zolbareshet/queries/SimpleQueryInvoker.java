@@ -10,15 +10,7 @@ import java.util.ArrayList;
 
 public class  SimpleQueryInvoker {
 
-    public static long getNextProductNuber(){
-        ArrayList<QueriesHandler.ResultLine> res = QueriesHandler.qHandler(Constants.GET_NEXT_PRODUCT_NUMBER,null,new Parameter.TYPE[]{Constants.TYPE_VALUE_TABLE_CONFIG});
-        return Long.parseLong((String)res.get(0).getContent().get(0));
-    }
 
-    public static void incrementProductNumber(){
-        long oldValue = SimpleQueryInvoker.getNextProductNuber();
-        QueriesHandler.updateQuery(Constants.INCREMENT_PRODUCT_NUMBER,new Parameter[]{new Parameter(Long.toString(oldValue),1, Parameter.TYPE.STRING)});
-    }
 
     public static ArrayList<QueriesHandler.ResultLine> getAllUsersWithCarts() { //return (username,cartCreationDate) pairs
         return QueriesHandler.qHandler(Constants.GET_ALL_USERS_WITH_CARTS_QUERY, null, new Parameter.TYPE[]{Parameter.TYPE.STRING, Parameter.TYPE.LONG});

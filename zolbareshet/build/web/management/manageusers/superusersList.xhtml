@@ -1,0 +1,22 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <p class="sectionTytle"> Super Users List</p>
+    <h:outputText value="Name" style="bold: true; color: deeppink;"/>
+    <h:outputText value="Phone Number" style="bold: true; color: deeppink; margin-left: 10em;"/>
+    <br/>
+    <h:panelGrid columns="6">
+        <ui:repeat value="#{managerPageHelperBean.getSuperUsers()}" var="superuser">
+            <h:outputText value="#{superuser.get(0)}"/>
+            <h:outputText value="#{superuser.get(1)}" style="margin-left: 10em;"/>
+            <h:commandButton class="styled-button" style="margin-left: 20em;" value="Edit" action="#{userBean.editSuperUser(superuser.get(0))}">
+                <f:ajax render="@form"/>
+            </h:commandButton>
+            <br/>
+            </ui:repeat>
+
+    </h:panelGrid>
+
+</ui:composition>

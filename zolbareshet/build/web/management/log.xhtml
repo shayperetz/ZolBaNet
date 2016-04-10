@@ -5,7 +5,8 @@
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <p class="sectionTytle"> Server.log</p>
     <ui:repeat value="#{customerBean.logger.readLog()}" var="line">
-        <h:outputText value="#{line}"/>
-        <br />
+        <h:outputText value="#{line.getKey()}" styleClass="#{line.getValue()%2==0?'even':'odd'}"/>
+        <br/>
     </ui:repeat>
+
 </ui:composition>

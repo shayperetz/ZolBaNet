@@ -24,9 +24,9 @@ public class PropertiesFileManager {
             stream = new FileInputStream(configFile);
             prop.load(stream);
         }catch (Exception ex) {
-                System.out.println("ERROR: CAN'T OPEN CONFIGURATION FILE");
-                System.exit(1);
-            }
+            System.out.println("ERROR: CAN'T OPEN CONFIGURATION FILE");
+            System.exit(1);
+        }
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
                 PropertiesFileManager.destroy();
@@ -45,7 +45,7 @@ public class PropertiesFileManager {
 
     public static void load() throws Exception{
 
-            prop.load(stream);
+        prop.load(stream);
 
     }
 

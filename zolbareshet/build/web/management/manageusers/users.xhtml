@@ -1,0 +1,34 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:panelGrid columns="7" style="margin-left: 50px;">
+    <h:commandButton immediate="true" value="Defined Super Users" class="#{managerPageNavigationBean.showListSuperusersSection || managerPageNavigationBean.showEditusersSection?'styled-pressed-button':'styled-button'}" action="#{managerPageNavigationBean.setShowListSuperusersSection()}">
+        <f:ajax render="@form"/>
+    </h:commandButton>
+    <h:outputText/>
+    <h:commandButton immediate="true" value="Create New SuperUser" class="#{managerPageNavigationBean.showNewSuperusersSection?'styled-pressed-button':'styled-button'}" action="#{managerPageNavigationBean.setShowNewSuperusersSection()}">
+        <f:ajax render="@form"/>
+    </h:commandButton>
+        <h:outputText/>
+        <h:commandButton immediate="true" value="Manage Regular Users" class="#{managerPageNavigationBean.showRegularUsersSection?'styled-pressed-button':'styled-button'}" action="#{managerPageNavigationBean.setShowRegularUsersSection()}">
+            <f:ajax render="@form"/>
+        </h:commandButton>
+    </h:panelGrid>
+    <div class="manager_page_section">
+        <h:panelGroup rendered="#{managerPageNavigationBean.showRegularUsersSection}">
+            <ui:include src="regularUsers.xhtml" />
+        </h:panelGroup>
+    </div>
+    <div class="manager_page_section">
+        <h:panelGroup rendered="#{managerPageNavigationBean.showListSuperusersSection and !managerPageNavigationBean.showEditusersSection}">
+            <ui:include src="superusersList.xhtml" />
+        </h:panelGroup>
+    </div>
+    <div class="manager_page_section">
+        <h:panelGroup rendered="#{managerPageNavigationBean.showNewSuperusersSection || managerPageNavigationBean.showEditusersSection}">
+            <ui:include src="newSuperuser.xhtml" />
+        </h:panelGroup>
+    </div>
+</ui:composition>

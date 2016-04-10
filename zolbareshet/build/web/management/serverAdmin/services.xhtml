@@ -1,0 +1,20 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <p class="sectionTytle"> Services Currently Running</p>
+    <h:form>
+    <h:panelGrid columns="2">
+    <ui:repeat value="#{managerPageHelperBean.services}" var="service">
+        <div>
+        <h:outputText value="#{service.getDisplayName()}"/>
+        <h:commandButton class="styled-button" style="position: absolute; right: 0px;" value="run now" action="#{service.runOnce()}">
+            <f:ajax render="@form"/>
+        </h:commandButton>
+        </div>
+        <br/>
+    </ui:repeat>
+    </h:panelGrid>
+</h:form>
+</ui:composition>

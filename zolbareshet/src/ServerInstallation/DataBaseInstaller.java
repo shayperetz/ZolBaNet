@@ -36,7 +36,7 @@ public final class DataBaseInstaller
     final String DataBaseUserName = getInstallationConfig.getDataBaseUserName();
     final String Password = getInstallationConfig.getDataBasePassword(); 
     try {   
-            connection = DriverManager.getConnection(URL  , DataBaseUserName , Password);
+                connection = DriverManager.getConnection(URL  , DataBaseUserName , Password);
             if ( connection.isValid(4000) == true ) 
                 {    
                 PreparedStatement table = connection.prepareStatement(Query) ;    

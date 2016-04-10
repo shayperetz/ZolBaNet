@@ -101,9 +101,28 @@ p {
     border:1px solid #1A87B9
 }
 
-.manger-section{
+.styled-pressed-button {
+    background: #e1180c;
+    background: -moz-linear-gradient(top, #c01c11 0%, #c01c11 100%);
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%, #e1180c),color-stop(100%, #c01c11));
+    background: -webkit-linear-gradient(top, #e1180c 0%, #c01c11 100%);
+    background: -o-linear-gradient(top, #e1180c 0%, #c01c11 100%);
+    background: -ms-linear-gradient(top, #e1180c 0%, #c01c11 100%);
+    background: linear-gradient(top, #e1180c 0%, #c01c11 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#25A6E1',endColorstr='#188BC0',GradientType=0);
+    padding:8px 13px;
+    color:#fff;
+    font-family:'Helvetica Neue',sans-serif;
+    font-size:17px;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border:1px solid #1A87B9
+}
+
+.manager_page_section{
     position: absolute;
-    left: 180px;
+    left: 150px;
     top: 50px;
 }
 
@@ -116,4 +135,29 @@ p {
     margin-bottom: 1px;
 }
 
+.even {
+    background-color: lemonchiffon;
+}
+.odd {
+    background-color: lightgoldenrodyellow;
+}
+.login {
+    position: absolute;
+    color: brown;
+    font-size: 22px;
+    font-family: Aharoni;
+    right: 200px;
+    top:10px;
+}
+.clock{
+    position: absolute;
+    color: brown;
+    font-size: 22px;
+    font-family: Aharoni;
+    left:200px;
+    top:10px;
+}
+.checkbox {
+
+}
 

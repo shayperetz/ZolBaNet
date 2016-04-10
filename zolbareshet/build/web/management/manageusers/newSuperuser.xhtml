@@ -1,0 +1,103 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <p class="sectionTytle">Create New Super User</p>
+    <h:form id="formid">
+
+        <!-- NAME SECTION -->
+
+        <p class="formstyle">Name</p>
+        <h:panelGrid columns="12" id="name">
+            <h:outputText value="First Name"/>
+            <h:inputText id="firstName" required="true" requiredMessage="Please enter your first name" value="#{userBean.name.firstName}" autocomplete="off"
+                         validatorMessage="First name can contain only letters and numbers and must be fewer than 30 characters">
+                <f:validateLength maximum="30"/>
+                <f:validateRegex pattern="(\w*\d*)*"/>
+            <h:message id="firstNameMessage" for="firstName" styleClass="error"/>
+            </h:inputText>
+            <h:outputText value="Last Name"/>
+            <h:inputText id="lastName" required="true" requiredMessage="Please enter your last name" value="#{userBean.name.lastName}" autocomplete="off"
+                         validatorMessage="Last name can contain only letters and numbers and must be fewer than 30 characters">
+                <f:validateLength maximum="30"/>
+                <f:validateRegex pattern="(\w*\d*)*"/>
+            <h:message id="lastNameMessage" for="lastName" styleClass="error"/>
+            </h:inputText>
+            <h:outputText value="EMAIL"  />
+            <h:inputText id="mailaddress" value="#{userBean.userInfo.mailAddress}" required="true" requiredMessage="Please enter your mail address" autocomplete="off"
+                        validatorMessage="enter email in format X@Y.Z">
+                <f:validateRegex pattern="[\w,\d,][\w,\d,-,_]*@[\w,\d]+\.[\w,\d]+"/>
+            </h:inputText>
+            <h:message id="mailMessage" for="mailaddress" styleClass="error"/>
+        </h:panelGrid>
+
+       
+        <!-- PHONE SECTION -->
+
+        <p class="formstyle">Phones</p>
+        <h:panelGrid id="phones" columns="14" >
+            <c:forEach var="title" items="#{userBean.phonesList}" varStatus="loop">
+                <h:inputText id="perfix#{loop.index}" required="true" requiredMessage="please enter the perfix"  value="#{title.perfix}"
+                             validatorMessage="perfix must can contain [2-3] digits" size="3" >
+                    <f:validateLength maximum="3" minimum="2"/>
+                    <f:validator validatorId="integervalidator" />
+                </h:inputText>
+                <h:message for="perfix#{loop.index}" styleClass="error"/>
+                <h:inputText   id="number#{loop.index}" required="true" requiredMessage="please enter phone number"  value="#{title.phoneNumber}"
+                               validatorMessage="phone number can contain [7-12] digits" size="13"    >
+                    <f:validateLength maximum="12" minimum="7"/>
+                    <f:validator validatorId="integervalidator" />
+                </h:inputText>
+                <h:message for="number#{loop.index}" styleClass="error"/>
+                <h:selectOneMenu  id="type#{loop.index}" required="true" requiredMessage="please select phone type" value="#{title.type}">
+                    <f:selectItem itemLabel="---select---" itemValue=""/>
+                    <f:selectItem itemLabel="HOME" itemValue="Home"/>
+                    <f:selectItem itemLabel="WORK" itemValue="Work"/>
+                    <f:selectItem itemLabel="MOBILE" itemValue="Mobile"/>
+                </h:selectOneMenu><span class="redStar">*</span>
+                <h:message for="type#{loop.index}" styleClass="error"/>
+            </c:forEach>
+        </h:panelGrid>
+        <h:message for="phones" styleClass="error"/>
+        <h:commandButton class="styled-button" value="+" action="#{userBean.addPhone()}" immediate="true">
+            <f:ajax render="@form"/>
+        </h:commandButton>
+        <h:commandButton class="styled-button" value="-" action="#{userBean.removePhone()}" immediate="true">
+            <f:ajax render="@form"/>
+        </h:commandButton>
+
+
+        <!-- CREDENTIALS SECTION -->
+
+        <p class="formstyle">LOGIN Information</p>
+        <h:panelGrid columns="16" >
+            <h:outputText value="NickName"  />
+            <h:inputText id="nickname" value="#{userBean.nickName}" required="true" requiredMessage="please enter your login nickname" autocomplete="off"
+                         validatorMessage="nick name can contain only english letters and digits" size="15">
+                <f:validateLength minimum="3" maximum="15"/>
+                <f:validateRegex pattern="[\d,\w]*"/>
+            </h:inputText>
+            <h:message id="nickNameMessage" for="nickname" styleClass="error"/>
+            <h:outputText value="Password"  />
+            <h:inputText id="password" value="#{userBean.password.password}" required="true" requiredMessage="Please enter your password" autocomplete="off"
+                         validatorMessage="password must be 6 character long contains atleast one digit and one letter" size="8">
+                <f:validateLength minimum="6"/>
+            </h:inputText>
+            <h:message id="passwordMessage" for="password" styleClass="error"/>
+            <h:outputText value="Role"  />
+            <h:selectOneMenu id="role" value="#{userBean.role}" >
+                <f:selectItems value="#{userBean.getRoles()}"/>
+            </h:selectOneMenu>
+        </h:panelGrid>
+        <h:commandButton class="styled-button" value="#{managerPageNavigationBean.showEditusersSection?'Save':'Register'}" action="#{userBean.register}" >
+            <f:ajax execute="@form" render="@form"/>
+        </h:commandButton>
+        <h:commandButton class="styled-button" value="Save" onclick="" style="display: none;" >
+            <f:ajax execute="@form" render="@form"/>
+        </h:commandButton>
+        <h:outputText value="The nickname you chose is already exists, try another one"  rendered="#{userBean.isNickNameAlreadyExists()?'true':'false'}" style="color: red; size: 20px;"/>
+        <h:outputText value="The email you chose is already exists"  rendered="#{userBean.isEmailAlreadyExists()?'true':'false'}" style="color: red; size: 20px;"/>
+    </h:form>
+</ui:composition>

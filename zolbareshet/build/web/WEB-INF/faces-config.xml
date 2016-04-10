@@ -4,6 +4,17 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     <lifecycle>
-        <phase-listener>shay.eilon.zolbareshet.test.LifeCycleListener</phase-listener>
+        <phase-listener>org.es.zolbareshet.test.LifeCycleListener</phase-listener>
     </lifecycle>
+    <lifecycle>
+        <phase-listener>org.es.zolbareshet.JsfHelpers.credentials.AuthorizationListener</phase-listener>
+    </lifecycle>
+    <application>
+        <navigation-handler>org.es.zolbareshet.JsfHelpers.helpers.CustomNavigationHandler</navigation-handler>
+    </application>
+    <factory>
+        <exception-handler-factory>
+            org.es.zolbareshet.JsfHelpers.helpers.CustomExceptionHandlerFactory
+        </exception-handler-factory>
+    </factory>
 </faces-config>
